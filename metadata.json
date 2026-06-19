@@ -1,0 +1,6 @@
+{
+  "name": "Nyuki",
+  "description": "Intelligent full-stack SaaS platform for real-time customer queue management, staff coordination, and appointment scheduling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
