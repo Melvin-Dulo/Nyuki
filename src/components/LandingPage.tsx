@@ -124,7 +124,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             </div>
 
            <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
-  Find and Book<br/>
+  Find and Book Trusted Services<br/>
   <span className="text-amber-600">Trusted Services.</span>
            </h1>
            
