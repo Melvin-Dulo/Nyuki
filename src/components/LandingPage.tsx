@@ -198,7 +198,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 <Calendar className="w-8 h-8" />
               </div>
               <h4 className="text-xl font-bold mb-3 text-white" Book Services Instantly
-                </h4>
+              </h4>
               <p className="text-stone-400 text-sm leading-relaxed mb-6">
                 Find trusted providers, view available times, and book appointments in minutes from any device.
               </p>
