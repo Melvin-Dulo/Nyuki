@@ -125,7 +125,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
 
             <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
               Bee The First.<br/>
-              <span className="text-amber-600">To Everywhere.</span>
+              <span className="text-amber-600">Anywhere.</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-stone-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
