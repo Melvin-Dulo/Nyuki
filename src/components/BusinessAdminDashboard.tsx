@@ -34,6 +34,8 @@ import {
   AppointmentStatus 
 } from "../types";
 import AnalyticsDashboardComponent from "./AnalyticsDashboardComponent";
+// Import your Supabase client instance
+import { supabase } from "./supabaseClient";
 
 interface BusinessAdminDashboardProps {
   business: Business;
@@ -89,10 +91,36 @@ export default function BusinessAdminDashboard({
     fetchTenantPayload();
   }, [business.id]);
 
+  const fetchServicesFromSupabase = async () => {
+    const { data, error } = await supabase
+      .from("services")
+      .select("*")
+      .eq("provider_id", business.id);
+
+    if (error) {
+      console.error("Error reading services:", error.message);
+    } else if (data) {
+      // Map database schema to your local Service types if necessary
+      const formattedServices: Service[] = data.map((item: any) => ({
+        id: item.id,
+        name: item.name,
+        priceKES: Number(item.price_kes),
+        durationMinutes: item.duration_minutes,
+        description: item.description || "",
+        isActive: item.is_active ?? true,
+        assignedStaffIds: []
+      }));
+      setServices(formattedServices);
+    }
+  };
+
   const fetchTenantPayload = async () => {
     try {
-      const [svcRes, stfRes, aptRes, qRes, invRes, appRes, nRes] = await Promise.all([
-        fetch(`/api/services?businessId=${business.id}`),
+      // Fetch services directly from our new Supabase cluster table
+      await fetchServicesFromSupabase();
+
+      // Maintain internal infrastructure mocks for sibling pipelines
+      const [stfRes, aptRes, qRes, invRes, appRes, nRes] = await Promise.all([
         fetch(`/api/staff?businessId=${business.id}`),
         fetch(`/api/appointments?businessId=${business.id}`),
         fetch(`/api/queue?businessId=${business.id}`),
@@ -101,7 +129,6 @@ export default function BusinessAdminDashboard({
         fetch(`/api/notifications/logs?businessId=${business.id}`)
       ]);
 
-      if (svcRes.ok) setServices(await svcRes.json());
       if (stfRes.ok) setStaff(await stfRes.json());
       if (aptRes.ok) setAppointments(await aptRes.json());
       if (qRes.ok) setQueue(await qRes.json());
@@ -119,44 +146,51 @@ export default function BusinessAdminDashboard({
     if (!svcName || !svcPrice) return;
 
     try {
-      const res = await fetch("/api/services", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          businessId: business.id,
-          name: svcName,
-          priceKES: svcPrice,
-          durationMinutes: svcDuration,
-          description: svcDesc,
-          assignedStaffIds: []
-        })
-      });
+      const { data, error } = await supabase
+        .from("services")
+        .insert([
+          {
+            provider_id: business.id,
+            name: svcName,
+            price_kes: svcPrice,
+            duration_minutes: svcDuration,
+            description: svcDesc,
+            is_active: true
+          }
+        ]);
 
-      if (res.ok) {
+      if (error) {
+        alert("Could not save service to regional engine: " + error.message);
+      } else {
         setSvcName("");
         setSvcPrice(1500);
         setSvcDuration(30);
         setSvcDesc("");
         setShowAddSvc(false);
-        // refresh services catalog
-        const svcRes = await fetch(`/api/services?businessId=${business.id}`);
-        if (svcRes.ok) setServices(await svcRes.json());
+        
+        // Dynamic re-fetch down from database line
+        await fetchServicesFromSupabase();
       }
-    } catch (er) { console.error(er); }
+    } catch (er) { 
+      console.error(er); 
+    }
   };
 
   const handleUpdateSvcStatus = async (svcId: string, isActive: boolean) => {
     try {
-      const res = await fetch(`/api/services/${svcId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isActive })
-      });
-      if (res.ok) {
-        const svcRes = await fetch(`/api/services?businessId=${business.id}`);
-        if (svcRes.ok) setServices(await svcRes.json());
+      const { error } = await supabase
+        .from("services")
+        .update({ is_active: isActive })
+        .eq("id", svcId);
+
+      if (error) {
+        alert("Could not update operational state: " + error.message);
+      } else {
+        await fetchServicesFromSupabase();
       }
-    } catch (err) { console.error(err); }
+    } catch (err) { 
+      console.error(err); 
+    }
   };
 
   const handleAddStaff = async (e: React.FormEvent) => {
@@ -210,7 +244,6 @@ export default function BusinessAdminDashboard({
           billingStatus: "Active",
           renewalDate: payload.invoice.dueDate
         });
-        // refresh invoices list
         const invRes = await fetch(`/api/billing/invoices?businessId=${business.id}`);
         if (invRes.ok) setInvoices(await invRes.json());
       } else {
@@ -226,7 +259,6 @@ export default function BusinessAdminDashboard({
   };
 
   const handleSaveProfile = async () => {
-    // Directly mutate corporate profile configurations
     onUpdateBusiness({
       ...business,
       name: bzName,
@@ -249,7 +281,7 @@ export default function BusinessAdminDashboard({
               <span className="font-extrabold text-white text-lg">N</span>
             </div>
             <div>
-              <span className="font-extrabold text-white text-base tracking-widest block leading-none font-bold italic">Nyuki Admin</span>
+              <span className="font-extrabold text-white text-base tracking-widest block leading-none italic">Nyuki Admin</span>
               <span className="text-[10px] text-stone-400 mt-1 block">Upper Hill Terminal</span>
             </div>
           </div>
@@ -299,7 +331,7 @@ export default function BusinessAdminDashboard({
       {/* MAIN WORKING AREA PANEL */}
       <main className="flex-grow p-6 sm:p-10 overflow-y-auto max-w-7xl mx-auto w-full">
         
-        {/* --- OVERVIEW TAB (THE ANALYTICS BENTO GRID) --- */}
+        {/* --- OVERVIEW TAB --- */}
         {activeTab === "Overview" && (
           <div className="space-y-8 animate-fade-in">
             <div className="bg-white p-6 rounded-2xl border border-stone-200">
@@ -313,8 +345,6 @@ export default function BusinessAdminDashboard({
                 Overview metrics computed dynamically for <strong>{business.name}</strong>.
               </p>
             </div>
-
-            {/* Mount our beautiful custom d3/svg analytics canvas */}
             <AnalyticsDashboardComponent businessId={business.id} />
           </div>
         )}
@@ -335,7 +365,7 @@ export default function BusinessAdminDashboard({
                   {queue.map(entry => (
                     <div key={entry.id} className="p-4 rounded-xl border border-stone-200 flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <span className="font-mono font-bold bg-stone-105 bg-stone-50 border px-2.5 py-1 rounded text-stone-850">
+                        <span className="font-mono font-bold bg-stone-50 border px-2.5 py-1 rounded text-stone-850">
                           {entry.queueNumber}
                         </span>
                         <div>
@@ -343,7 +373,6 @@ export default function BusinessAdminDashboard({
                           <span className="block text-xs text-stone-500">Joined at: {entry.joinedAt.split("T")[1]?.substring(0, 5) || "Active"}</span>
                         </div>
                       </div>
-
                       <span className="text-xs bg-stone-100 font-bold px-2 py-0.5 rounded text-stone-700">
                         {entry.status}
                       </span>
@@ -441,7 +470,7 @@ export default function BusinessAdminDashboard({
 
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
               {services.map(s => (
-                <div key={s.id} className={`bg-white p-6 rounded-2xl border p-6 flex flex-col justify-between ${s.isActive ? "border-stone-200" : "border-stone-105 opacity-60"}`}>
+                <div key={s.id} className={`bg-white p-6 rounded-2xl border flex flex-col justify-between ${s.isActive ? "border-stone-200" : "border-stone-100 opacity-60"}`}>
                   <div>
                     <div className="flex justify-between items-center mb-3">
                       <span className="text-[10px] bg-stone-100 text-[#451a03] font-bold px-2 py-0.5 rounded-full uppercase">
@@ -459,7 +488,7 @@ export default function BusinessAdminDashboard({
                     <button 
                       onClick={() => handleUpdateSvcStatus(s.id, !s.isActive)}
                       className={`text-[10px] font-black uppercase px-2.5 py-1 rounded cursor-pointer ${
-                        s.isActive ? "bg-emerald-100 text-emerald-850" : "bg-red-105 bg-red-100 text-red-800"
+                        s.isActive ? "bg-emerald-100 text-emerald-850" : "bg-red-100 text-red-800"
                       }`}
                     >
                       {s.isActive ? "Active (On)" : "Disabled (Off)"}
@@ -481,7 +510,7 @@ export default function BusinessAdminDashboard({
                 <h2 className="text-stone-900 font-black text-lg uppercase flex items-center">
                   <span>Assigned Coordinators</span>
                 </h2>
-                <p className="text-stone-505 text-xs text-stone-500">Invite, review, and allocate doctors, hair stylists, or branch teller roles here.</p>
+                <p className="text-stone-500 text-xs">Invite, review, and allocate doctors, hair stylists, or branch teller roles here.</p>
               </div>
 
               <button
@@ -496,7 +525,7 @@ export default function BusinessAdminDashboard({
 
             {showAddStaff && (
               <form onSubmit={handleAddStaff} className="bg-white p-6 rounded-2xl border border-amber-500/30 max-w-xl space-y-4 animate-fade-in">
-                <h3 className="font-bold text-sm text-stone-905 uppercase text-stone-950">Invite Staff Credentials</h3>
+                <h3 className="font-bold text-sm text-stone-950 uppercase">Invite Staff Credentials</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -534,8 +563,8 @@ export default function BusinessAdminDashboard({
                   />
                 </div>
 
-                <div className="text-[10px] text-stone-450 leading-relaxed bg-[#faf8f5] p-3 rounded-xl">
-                  🔔 Inviting creates a mock staff credential linked to this tenant automatically. Default password remains <code className="font-mono bg-stone-105 border px-1">password</code>.
+                <div className="text-[10px] text-stone-500 leading-relaxed bg-[#faf8f5] p-3 rounded-xl">
+                  🔔 Inviting creates a mock staff credential linked to this tenant automatically. Default password remains <code className="font-mono bg-stone-100 border px-1">password</code>.
                 </div>
 
                 <button
@@ -557,7 +586,7 @@ export default function BusinessAdminDashboard({
                   <h4 className="font-bold text-stone-900 text-sm leading-snug mb-1">{member.name}</h4>
                   <span className="text-xs text-stone-500 font-mono block leading-none mb-3">{member.email}</span>
 
-                  <div className="pt-4 border-t border-stone-100 flex justify-between text-[11px] text-stone-450 font-semibold">
+                  <div className="pt-4 border-t border-stone-100 flex justify-between text-[11px] font-semibold">
                     <span>PHONE: {member.phone || "N/A"}</span>
                     <span className="text-stone-800 uppercase text-[10px]">Active ✔</span>
                   </div>
@@ -617,7 +646,7 @@ export default function BusinessAdminDashboard({
                     className="w-full flex justify-between items-center p-3 bg-[#faf8f5] hover:bg-stone-50 border border-stone-200 rounded-xl cursor-pointer text-left transition-all"
                   >
                     <div>
-                      <span className="block font-bold text-stone-800 text-xs text-stone-950 font-black">MEDIUM BUSINESS</span>
+                      <span className="block font-bold text-stone-850 text-xs font-black">MEDIUM BUSINESS</span>
                       <span className="text-[10px] text-stone-500">Max 5,000 bookings/mo</span>
                     </div>
                     <span className="font-black text-xs text-amber-800">KES 5,000</span>
@@ -627,7 +656,7 @@ export default function BusinessAdminDashboard({
                     type="button"
                     disabled={stkLoading}
                     onClick={() => handleTriggerSTKSim(BusinessPlan.PREMIUM, 10000)}
-                    className="w-full flex justify-between items-center p-3 bg-stone-905 bg-stone-900 border border-stone-800 text-white rounded-xl cursor-pointer text-left transition-all"
+                    className="w-full flex justify-between items-center p-3 bg-stone-900 border border-stone-800 text-white rounded-xl cursor-pointer text-left transition-all"
                   >
                     <div>
                       <span className="block font-bold text-amber-500 text-xs uppercase font-black">PREMIUM BUSINESS</span>
@@ -644,9 +673,9 @@ export default function BusinessAdminDashboard({
                 )}
               </div>
 
-              {/* INVOICES SPECTURM LIST */}
+              {/* INVOICES LIST */}
               <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-stone-200">
-                <h3 className="text-stone-900 font-extrabold text-sm uppercase mb-4 text-stone-950">KES Billing History</h3>
+                <h3 className="text-stone-950 font-extrabold text-sm uppercase mb-4">KES Billing History</h3>
                 
                 {invoices.length === 0 ? (
                   <p className="text-xs text-stone-400">No invoices traced.</p>
@@ -654,13 +683,13 @@ export default function BusinessAdminDashboard({
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead>
-                        <tr className="border-b border-stone-200 text-stone-450 uppercase font-bold text-[10px] tracking-wider pb-2">
-                          <th className="pb-3 text-stone-400 font-semibold">ID</th>
-                          <th className="pb-3 text-stone-400 font-semibold">Service Plan Billed</th>
-                          <th className="pb-3 text-stone-400 font-semibold">Amount (KES)</th>
-                          <th className="pb-3 text-stone-400 font-semibold">Billing Date</th>
-                          <th className="pb-3 text-stone-450 font-semibold">Method</th>
-                          <th className="text-right pb-3 text-stone-450 font-semibold">Status</th>
+                        <tr className="border-b border-stone-200 text-stone-400 uppercase font-bold text-[10px] tracking-wider pb-2">
+                          <th className="pb-3 font-semibold">ID</th>
+                          <th className="pb-3 font-semibold">Service Plan Billed</th>
+                          <th className="pb-3 font-semibold">Amount (KES)</th>
+                          <th className="pb-3 font-semibold">Billing Date</th>
+                          <th className="pb-3 font-semibold">Method</th>
+                          <th className="text-right pb-3 font-semibold">Status</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-stone-100 font-semibold text-stone-700 h-10">
@@ -688,143 +717,7 @@ export default function BusinessAdminDashboard({
 
           </div>
         )}
-
-        {/* --- APPLICANT CANDIDATES RECRUIT BOARD --- */}
-        {activeTab === "Recruiting Board" && (
-          <div className="space-y-8 animate-fade-in font-sans">
-            
-            <div className="bg-white p-6 rounded-2xl border border-stone-200">
-              <h2 className="text-stone-900 font-black text-lg uppercase flex items-center">
-                <Briefcase className="w-5 h-5 mr-2 text-amber-500" />
-                <span>Careers Submissions Monitor</span>
-              </h2>
-              <p className="text-stone-505 text-xs text-stone-500">Review jobs submitted via the Careers Tab locally. Simulates real HR management systems.</p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl border border-stone-200">
-              {applications.length === 0 ? (
-                <p className="text-stone-400 text-xs leading-normal">No recruitment applicants logged. Submit test applications on the Careers tab!</p>
-              ) : (
-                <div className="divide-y divide-stone-100">
-                  {applications.map(app => (
-                    <div key={app.id} className="py-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                      <div className="space-y-1">
-                        <span className="text-[10px] bg-[#fbbf24]/10 text-amber-850 font-black tracking-widest uppercase px-2 py-0.5 rounded border border-[#fbbf24]/10">
-                          {app.roleApply}
-                        </span>
-                        <h4 className="font-extrabold text-base text-stone-900 leading-snug pt-1">{app.name}</h4>
-                        <div className="text-xs font-mono text-stone-500 flex items-center space-x-2.5">
-                          <span>{app.email}</span>
-                          <span>•</span>
-                          <span>{app.phone}</span>
-                        </div>
-                        <p className="text-stone-604 text-xs text-stone-605 italic bg-stone-50 p-4 rounded-xl border font-sans mt-3">
-                          "{app.coverLetter}"
-                        </p>
-                      </div>
-
-                      <div className="text-right space-y-2 self-start sm:self-auto">
-                        <span className="text-xs text-stone-400 font-bold block">{app.appliedAt.substring(0, 10)}</span>
-                        
-                        <span className="bg-amber-100 border border-amber-500/10 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
-                          {app.status}
-                        </span>
-
-                        <a 
-                          href={app.resumeUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="bg-stone-100 text-[#451a03] font-bold text-[10px] uppercase px-3 py-1.5 rounded block text-center border cursor-pointer hover:bg-stone-205 transition-all mt-1"
-                        >
-                          Simulate PDF View
-                        </a>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-          </div>
-        )}
-
-        {/* --- SETTINGS PROFILE --- */}
-        {activeTab === "Settings Profile" && (
-          <div className="space-y-8 animate-fade-in font-sans">
-            
-            <div className="bg-white p-6 rounded-2xl border border-stone-200">
-              <h2 className="text-stone-901 font-black text-lg uppercase">System Profile Configurations</h2>
-              <p className="text-stone-500 text-xs">Directly edit branch addresses, operating hours blocks, and description guidelines.</p>
-            </div>
-
-            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 max-w-xl space-y-5">
-              
-              <div>
-                <label className="block text-[10px] font-bold text-stone-450 uppercase mb-1.5">Business Name</label>
-                <input
-                  type="text"
-                  value={bzName}
-                  onChange={(e) => setBzName(e.target.value)}
-                  className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] font-bold text-stone-450 uppercase mb-1.5">Opening Hours</label>
-                  <input
-                    type="text"
-                    value={bzOperatingStart}
-                    onChange={(e) => setOperatingStart(e.target.value)}
-                    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none font-mono"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-stone-450 uppercase mb-1.5">Closing Hours</label>
-                  <input
-                    type="text"
-                    value={bzOperatingEnd}
-                    onChange={(e) => setOperatingEnd(e.target.value)}
-                    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none font-mono"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold text-stone-450 uppercase mb-1.5">Safaricom Representative Phone</label>
-                <input
-                  type="tel"
-                  value={bzPhone}
-                  onChange={(e) => setBzPhone(e.target.value)}
-                  className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none font-mono"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold text-stone-450 uppercase mb-1.5">Branch Profile Description Text</label>
-                <textarea
-                  rows={3}
-                  value={bzDesc}
-                  onChange={(e) => setBzDesc(e.target.value)}
-                  className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleSaveProfile}
-                className="bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs px-5 py-3 rounded-xl cursor-pointer transition-all uppercase border"
-              >
-                Save Profile Changes
-              </button>
-
-            </div>
-
-          </div>
-        )}
-
       </main>
-
     </div>
   );
 }
