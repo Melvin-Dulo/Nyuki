@@ -78,14 +78,14 @@ export default function BusinessAdminDashboard({
   const [showAddStaff, setShowAddStaff] = useState<boolean>(false);
   const [stfName, setStfName] = useState<string>("");
   const [stfEmail, setStfEmail] = useState<string>("");
-  const [stfPhone, setStfPhone] = useState<string>("");
+  const [stfPhone, setStfPhone] = useState<string>( "");
 
   // Business settings profile edit states
   const [bzName, setBzName] = useState<string>(business.name);
-  const [bzOperatingStart, setOperatingStart] = useState<string>(business.operatingHours.start);
-  const [bzOperatingEnd, setOperatingEnd] = useState<string>(business.operatingHours.end);
-  const [bzDesc, setBzDesc] = useState<string>(business.description);
-  const [bzPhone, setBzPhone] = useState<string>(business.phone);
+  const [bzOperatingStart, setOperatingStart] = useState<string>(business.operatingHours?.start || "08:00");
+  const [bzOperatingEnd, setOperatingEnd] = useState<string>(business.operatingHours?.end || "17:00");
+  const [bzDesc, setBzDesc] = useState<string>(business.description || "");
+  const [bzPhone, setBzPhone] = useState<string>(business.phone || "");
 
   useEffect(() => {
     fetchTenantPayload();
@@ -237,12 +237,12 @@ export default function BusinessAdminDashboard({
 
       if (res.ok) {
         const payload = await res.json();
-        setStkStateMsg(`STK PUSH EXECUTED! KES ${price} billed. Safaricom terminal reference: ${payload.referenceId}.`);
+        setStkStateMsg(`STK PUSH EXECUTED! KES ${price} billed. Safaricom terminal reference: ${payload.referenceId || "N/A"}.`);
         onUpdateBusiness({
           ...business,
           activePlan: plan,
           billingStatus: "Active",
-          renewalDate: payload.invoice.dueDate
+          renewalDate: payload.invoice?.dueDate || "30 Days"
         });
         const invRes = await fetch(`/api/billing/invoices?businessId=${business.id}`);
         if (invRes.ok) setInvoices(await invRes.json());
@@ -273,11 +273,11 @@ export default function BusinessAdminDashboard({
     <div id="admin-dashboard-root" className="min-h-screen bg-[#FDFBF7] text-stone-900 font-sans flex flex-col md:flex-row">
       
       {/* SIDEBAR NAVIGATION CONTROLS */}
-      <aside className="w-full md:w-64 bg-stone-900 text-[#faf8f5] border-r border-stone-850 flex flex-col justify-between p-6">
+      <aside className="w-full md:w-64 bg-stone-900 text-[#faf8f5] border-r border-stone-850 flex flex-col justify-between p-6 shrink-0">
         <div>
           {/* Logo */}
           <div className="flex items-center space-x-3 mb-10 pb-6 border-b border-stone-800">
-            <div className="w-10 h-10 bg-amber-500 flex items-center justify-center clip-hex shadow-md shadow-amber-500/15">
+            <div className="w-10 h-10 bg-amber-500 flex items-center justify-center rounded-xl shadow-md shadow-amber-500/15">
               <span className="font-extrabold text-white text-lg">N</span>
             </div>
             <div>
@@ -294,6 +294,7 @@ export default function BusinessAdminDashboard({
               return (
                 <button
                   key={tab}
+                  type="button"
                   onClick={() => setActiveTab(tab)}
                   className={`w-full text-left font-bold text-xs uppercase px-4 py-3 rounded-xl transition-all cursor-pointer block leading-none ${
                     isActive 
@@ -310,15 +311,16 @@ export default function BusinessAdminDashboard({
 
         {/* Tenant Details Card */}
         <div id="tenant-details-card" className="mt-8 border-t border-stone-800 pt-6 space-y-3.5">
-          <div className="flex items-center space-x-2 bg-stone-850 p-3.5 rounded-xl border border-stone-805">
+          <div className="flex items-center space-x-2 bg-stone-850 p-3.5 rounded-xl border border-stone-800">
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-            <div>
-              <span className="block text-[11px] text-white font-bold leading-none">{business.name}</span>
-              <span className="text-[9px] text-stone-400 font-medium block mt-1">Plan: {business.activePlan} ({business.billingStatus})</span>
+            <div className="overflow-hidden">
+              <span className="block text-[11px] text-white font-bold leading-none truncate">{business.name}</span>
+              <span className="text-[9px] text-stone-400 font-medium block mt-1 truncate">Plan: {business.activePlan} ({business.billingStatus})</span>
             </div>
           </div>
 
           <button
+            type="button"
             onClick={onLogout}
             className="w-full flex items-center justify-center space-x-1 border border-stone-700 hover:border-white text-stone-400 hover:text-[#faf8f5] text-xs font-bold leading-none py-2 rounded-lg transition-all cursor-pointer"
           >
@@ -398,6 +400,7 @@ export default function BusinessAdminDashboard({
 
               <button
                 id="btn-add-svc-catalog"
+                type="button"
                 onClick={() => setShowAddSvc(!showAddSvc)}
                 className="bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs px-4.5 py-3 rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer"
               >
@@ -486,6 +489,7 @@ export default function BusinessAdminDashboard({
                   <div className="flex items-center justify-between border-t border-stone-100 pt-4 mt-2">
                     <span className="text-[10px] font-bold text-stone-400">STATUS:</span>
                     <button 
+                      type="button"
                       onClick={() => handleUpdateSvcStatus(s.id, !s.isActive)}
                       className={`text-[10px] font-black uppercase px-2.5 py-1 rounded cursor-pointer ${
                         s.isActive ? "bg-emerald-100 text-emerald-850" : "bg-red-100 text-red-800"
@@ -515,6 +519,7 @@ export default function BusinessAdminDashboard({
 
               <button
                 id="btn-invite-staff-catalog"
+                type="button"
                 onClick={() => setShowAddStaff(!showAddStaff)}
                 className="bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs px-4.5 py-3 rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer"
               >
@@ -692,17 +697,17 @@ export default function BusinessAdminDashboard({
                           <th className="text-right pb-3 font-semibold">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-stone-100 font-semibold text-stone-700 h-10">
+                      <tbody className="divide-y divide-stone-100 font-semibold text-stone-700">
                         {invoices.map(inv => (
                           <tr key={inv.id}>
-                            <td className="py-3 font-mono text-stone-500">{inv.id}</td>
-                            <td className="py-3 uppercase">{inv.planName}</td>
+                            <td className="py-3 font-mono text-stone-500 text-[11px] max-w-[100px] truncate">{inv.id}</td>
+                            <td className="py-3 uppercase text-stone-900">{inv.planName}</td>
                             <td className="py-3 font-black text-stone-900">KES {inv.amountKES.toLocaleString()}</td>
-                            <td className="py-3">{inv.billingDate}</td>
-                            <td className="py-3 text-stone-500">{inv.paymentMethod}</td>
+                            <td className="py-3 text-stone-500">{inv.billingDate}</td>
+                            <td className="py-3 text-stone-500 font-mono">{inv.paymentMethod}</td>
                             <td className="py-3 text-right">
-                              <span className="bg-emerald-100 text-emerald-850 px-2.5 py-1 rounded text-[10px] uppercase font-bold">
-                                {inv.status}
+                              <span className="bg-emerald-100 text-emerald-850 px-2 py-0.5 rounded text-[10px] uppercase font-bold">
+                                Paid
                               </span>
                             </td>
                           </tr>
@@ -712,11 +717,138 @@ export default function BusinessAdminDashboard({
                   </div>
                 )}
               </div>
-
             </div>
-
           </div>
         )}
+
+        {/* --- APPLICANT CANDIDATES RECRUIT BOARD --- */}
+        {activeTab === "Recruiting Board" && (
+          <div className="space-y-8 animate-fade-in font-sans">
+            <div className="bg-white p-6 rounded-2xl border border-stone-200">
+              <h2 className="text-stone-900 font-black text-lg uppercase flex items-center">
+                <Briefcase className="w-5 h-5 mr-2 text-amber-500" />
+                <span>Careers Submissions Monitor</span>
+              </h2>
+              <p className="text-stone-500 text-xs">Review jobs submitted via the Careers Tab locally. Simulates real HR management systems.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-stone-200">
+              {applications.length === 0 ? (
+                <p className="text-stone-400 text-xs leading-normal">No recruitment applicants logged. Submit test applications on the Careers tab!</p>
+              ) : (
+                <div className="divide-y divide-stone-100">
+                  {applications.map(app => (
+                    <div key={app.id} className="py-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                      <div className="space-y-1">
+                        <span className="text-[10px] bg-amber-500/10 text-amber-850 font-black tracking-widest uppercase px-2 py-0.5 rounded border border-amber-500/10">
+                          {app.roleApply}
+                        </span>
+                        <h4 className="font-extrabold text-base text-stone-900 leading-snug pt-1">{app.name}</h4>
+                        <div className="text-xs font-mono text-stone-500 flex items-center space-x-2.5">
+                          <span>{app.email}</span>
+                          <span>•</span>
+                          <span>{app.phone}</span>
+                        </div>
+                        <p className="text-stone-600 text-xs italic bg-stone-50 p-4 rounded-xl border font-sans mt-3">
+                          "{app.coverLetter}"
+                        </p>
+                      </div>
+
+                      <div className="text-right space-y-2 self-start sm:self-auto">
+                        <span className="text-xs text-stone-400 font-bold block">{app.appliedAt?.substring(0, 10) || "Recent"}</span>
+                        
+                        <span className="bg-amber-100 border border-amber-500/10 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
+                          {app.status}
+                        </span>
+
+                        <a 
+                          href={app.resumeUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="bg-stone-100 text-[#451a03] font-bold text-[10px] uppercase px-3 py-1.5 rounded block text-center border cursor-pointer hover:bg-stone-200 transition-all mt-1"
+                        >
+                          Simulate PDF View
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* --- SETTINGS PROFILE --- */}
+        {activeTab === "Settings Profile" && (
+          <div className="space-y-8 animate-fade-in font-sans">
+            <div className="bg-white p-6 rounded-2xl border border-stone-200">
+              <h2 className="text-stone-900 font-black text-lg uppercase">System Profile Configurations</h2>
+              <p className="text-stone-500 text-xs">Directly edit branch addresses, operating hours blocks, and description guidelines.</p>
+            </div>
+
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 max-w-xl space-y-5">
+              <div>
+                <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1.5">Business Name</label>
+                <input
+                  type="text"
+                  value={bzName}
+                  onChange={(e) => setBzName(e.target.value)}
+                  className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1.5">Opening Hours</label>
+                  <input
+                    type="text"
+                    value={bzOperatingStart}
+                    onChange={(e) => setOperatingStart(e.target.value)}
+                    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none font-mono"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1.5">Closing Hours</label>
+                  <input
+                    type="text"
+                    value={bzOperatingEnd}
+                    onChange={(e) => setOperatingEnd(e.target.value)}
+                    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none font-mono"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1.5">Safaricom Representative Phone</label>
+                <input
+                  type="tel"
+                  value={bzPhone}
+                  onChange={(e) => setBzPhone(e.target.value)}
+                  className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none font-mono"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold text-stone-400 uppercase mb-1.5">Branch Profile Description Text</label>
+                <textarea
+                  rows={3}
+                  value={bzDesc}
+                  onChange={(e) => setBzDesc(e.target.value)}
+                  className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-stone-850 outline-none resize-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleSaveProfile}
+                className="bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs px-5 py-3 rounded-xl cursor-pointer transition-all uppercase border"
+              >
+                Save Profile Changes
+              </button>
+            </div>
+          </div>
+        )}
+
       </main>
     </div>
   );
