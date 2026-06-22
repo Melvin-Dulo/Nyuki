@@ -26,31 +26,31 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
 
   const industries = [
     {
-      name: "Healthcare",
-      title: "Clinics & Hospitals",
-      desc: "Streamline patient triage, decrease congestion in waiting bays, and enable transparent emergency routing.",
-      stats: "34% Wait-Time Decreased",
+      name: "Health & Wellness",
+      title: "Clinics, Hospitals & Specialists",
+      desc: "Book appointments with clinics, hospitals, specialists, and wellness providers from one place.",
+      stats: "24/7 Appointment Booking",
       icon: Activity
     },
     {
-      name: "Beauty & Spa",
-      title: "Salons & Barbershops",
-      desc: "Stop walk-in leaks and coordinate master-stylists instantly. Maximize seat uptime with smart queue pacing.",
-      stats: "28% Booking Expansion",
+      name: "Beauty & Salon",
+      title: "Salons, Barbers & Spas",
+      desc: "Discover trusted beauty professionals, compare services, and schedule appointments instantly.",
+      stats:  "Instant Online Booking",
       icon: Sparkles
     },
     {
-      name: "Financial Hubs",
-      title: "SACCOs & Bank Branches",
-      desc: "Give financial members exact remote SMS queue numbers so they only arrive when pre-called to counters.",
-      stats: "99% Customer Satisfaction",
+      name: "Professional Services",
+      title: "Consultants & Business Services",
+      desc: "Connect with accountants, consultants, legal professionals, and other service providers.",
+      stats:  "Verified Providers",
       icon: Building2
     },
     {
-      name: "Education",
-      title: "Universities & Colleges",
-      desc: "Organize registrar offices, advisory clinics, and student services without standing in 200m queues.",
-      stats: "45m Saved Per Student",
+      name: "Education & Tutoring",
+      title: "Tutors, Coaches & Training",
+      desc: "Book tutoring sessions, training programs, coaching appointments, and educational services.",
+      stats: "Flexible Scheduling",
       icon: Users
     }
   ];
@@ -123,13 +123,13 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               <span>Regional Launch: Supporting Kenya, Uganda & East Africa</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
-              Bee The First.<br/>
-              <span className="text-amber-600">Anywhere.</span>
-            </h1>
-
+           <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
+  Find and Book<br/>
+  <span className="text-amber-600">Trusted Services.</span>
+           </h1>
+           
             <p className="text-lg sm:text-xl text-stone-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
-              Make waiting a relic of the past. Nyuki coordinates digital scheduling, predictive live queues, and staff workflows in one beautiful platform.
+  Discover trusted service providers, compare options, book appointments, and pay securely—all in one place with Nyuki.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -138,7 +138,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 onClick={() => onOpenAuth("admin")}
                 className="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-8 py-4 rounded-xl shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2 cursor-pointer border border-amber-600"
               >
-                <span>Setup Your Business Free</span>
+                <span>Find Services</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
               <button 
@@ -146,7 +146,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 onClick={() => onOpenAuth("customer")}
                 className="w-full sm:w-auto bg-[#faf8f5] border-2 border-stone-200 hover:border-stone-400 text-stone-700 font-bold px-8 py-4 rounded-xl transition-all cursor-pointer"
               >
-                Join Queue as Customer
+                Browse Providers
               </button>
             </div>
 
@@ -181,12 +181,12 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="text-center max-w-2xl mx-auto mb-20">
-            <h2 className="text-xs font-bold text-amber-500 uppercase tracking-widest mb-3">Sovereign Capabilities</h2>
+            <h2 className="text-xs font-bold text-amber-500 uppercase tracking-widest mb-3">Explore Services</h2>
             <h3 className="text-3xl sm:text-4xl font-black tracking-tight mb-4 text-white">
-              Smarter Customer Flow Management
+              Find the Right Service for Every Need
             </h3>
             <p className="text-stone-400">
-              Stop bleeding customers to tedious waiting bays and unguided procedures. Nyuki delivers coordinate superiority with local readiness.
+              Browse trusted providers across multiple categories, compare services, and book appointments in minutes.
             </p>
           </div>
 
@@ -197,18 +197,19 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               <div className="bg-amber-500/10 text-amber-500 p-4 rounded-xl w-14 h-14 flex items-center justify-center mb-6">
                 <Calendar className="w-8 h-8" />
               </div>
-              <h4 className="text-xl font-bold mb-3 text-white">Dynamic Appointment Scheduling</h4>
+              <h4 className="text-xl font-bold mb-3 text-white" Book Services Instantly
+                </h4>
               <p className="text-stone-400 text-sm leading-relaxed mb-6">
-                Enable self-serve bookings via customizable client dashboards. Avoid double assignments with precise service hours constraint guards.
+                Find trusted providers, view available times, and book appointments in minutes from any device.
               </p>
               <ul className="space-y-2 text-xs font-bold text-stone-300">
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Instant Booking Reference IDs</span>
+                  <span>Verified Service Providers</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Direct Customer Self-Checks</span>
+                  <span>Real-Time Availability</span>
                 </li>
               </ul>
             </div>
@@ -218,18 +219,18 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               <div className="bg-amber-500/10 text-amber-500 p-4 rounded-xl w-14 h-14 flex items-center justify-center mb-6">
                 <Clock className="w-8 h-8" />
               </div>
-              <h4 className="text-xl font-bold mb-3 text-white">Realtime Interactive Queue Board</h4>
+              <h4 className="text-xl font-bold mb-3 text-white">Grow Your Business</h4>
               <p className="text-stone-400 text-sm leading-relaxed mb-6">
-                Pull up live panels, coordinate walk-ins instantly, trigger single-click Ticket CALL commands, skip non-arrivals, and complete operations smoothly.
+                Reach more customers, manage bookings effortlessly, and accept payments through one simple platform.
               </p>
               <ul className="space-y-2 text-xs font-bold text-stone-300">
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Predictive Wait Time Computations</span>
+                  <span>More Customer Bookings</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Drag-Sequence Priority Swapping</span>
+                  <span>Integrated M-Pesa Payments</span>
                 </li>
               </ul>
             </div>
@@ -239,18 +240,18 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               <div className="bg-amber-500/10 text-amber-500 p-4 rounded-xl w-14 h-14 flex items-center justify-center mb-6">
                 <Bell className="w-8 h-8" />
               </div>
-              <h4 className="text-xl font-bold mb-3 text-white">African SMS Gateway (Africa's Talking)</h4>
+              <h4 className="text-xl font-bold mb-3 text-white">Stay Informed Every Step</h4>
               <p className="text-stone-400 text-sm leading-relaxed mb-6">
-                Trigger transactional queue numbers, service check-ins, time-pacing reminders, and system invoices dynamically to regional Safaricom numbers.
+                Receive instant notifications about bookings, payments, reminders, and appointment updates directly to your phone.
               </p>
               <ul className="space-y-2 text-xs font-bold text-stone-300">
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Zero Network Latency Delivery</span>
+                  <span>Appointment Reminders</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Comprehensive Transmission Logs</span>
+                  <span>Booking & Payment Updates</span>
                 </li>
               </ul>
             </div>
@@ -266,12 +267,12 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-5">
-              <h2 className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3">Versatile Verticals</h2>
+              <h2 className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3">Service Categories</h2>
               <h3 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight mb-6">
-                Built to serve modern operations in East Africa
+                Find Services for Every Need
               </h3>
               <p className="text-stone-600 mb-8 leading-relaxed">
-                Nyuki accommodates complex scheduling hierarchies. Choose your target industry below to see how customer flow optimizes.
+                Explore trusted providers across multiple categories. Book appointments, compare services, and discover businesses near you.
               </p>
 
               <div className="space-y-3">
