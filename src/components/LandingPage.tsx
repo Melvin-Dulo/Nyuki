@@ -60,11 +60,26 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
       
       {/* HEADER NAVIGATION */}
       <header id="landing-header" className="sticky top-0 z-50 bg-[#FDFBF7]/90 backdrop-blur-md border-b border-stone-200/80">
-       <img
-  src="/nyuki-logo.png"
-  alt="Nyuki"
-  className="w-10 h-10 object-contain"
-/>
+       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+  <div className="flex items-center space-x-3">
+    <img
+      src="/nyuki-logo.png"
+      alt="Nyuki"
+      className="w-10 h-10 object-contain"
+    />
+
+<div>
+  <span className="text-2xl font-bold tracking-tight text-stone-900 italic">
+    Nyuki
+  </span>
+  <span className="block text-[10px] font-bold text-amber-600 uppercase tracking-widest leading-none mt-0.5">
+    Bee First
+  </span>
+</div>
+
+  </div>
+
 
           <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold text-stone-600">
             <a href="#features" className="hover:text-amber-600 transition-colors">Features</a>
