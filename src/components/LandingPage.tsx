@@ -247,7 +247,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               <ul className="space-y-2 text-xs font-bold text-stone-300">
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Appointment reminders</span>
+                  <span>Appointment Reminders</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
