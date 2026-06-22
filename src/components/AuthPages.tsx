@@ -1,3 +1,4 @@
+import { supabase } from './supabaseClient';
 import React, { useState } from "react";
 import { 
   Lock, 
@@ -45,23 +46,32 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 
     setLoading(true);
     setErrorMsg("");
+    
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: loginEmail, password })
+      // Direct Real-time Auth with Supabase
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: loginEmail,
+        password: password,
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        onLoginSuccess(data.user, data.business);
-      } else {
-        const errData = await res.json();
-        setErrorMsg(errData.error || "Authentication failed.");
+      if (error) {
+        setErrorMsg(error.message);
+        return;
+      }
+
+      if (data?.user) {
+        // Fetch matching provider details if they exist
+        const { data: providerData } = await supabase
+          .from('providers')
+          .select('*')
+          .eq('id', data.user.id)
+          .single();
+
+        onLoginSuccess(data.user, providerData || null);
       }
     } catch (err) {
       console.error(err);
-      setErrorMsg("A network timeout or error occurred.");
+      setErrorMsg("An unexpected authentication timeout occurred.");
     } finally {
       setLoading(false);
     }
@@ -76,27 +86,41 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 
     setLoading(true);
     setErrorMsg("");
+
     try {
-      const res = await fetch("/api/auth/register-business", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          businessName,
-          industry,
-          adminName,
-          email,
-          phone,
-          password: "password", // default password for development convenience
-          plan: selectedPlan
-        })
+      // 1. Create Login Account in Supabase Auth Engine
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password, // Uses default development "password" block or state
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        onLoginSuccess(data.user, data.business);
-      } else {
-        const errData = await res.json();
-        setErrorMsg(errData.error || "Registration failed.");
+      if (error) {
+        setErrorMsg(error.message);
+        return;
+      }
+
+      const userId = data.user?.id;
+
+      if (userId) {
+        // 2. Drop the business profile entry straight into your 'providers' database grid
+        const { error: insertError } = await supabase
+          .from('providers')
+          .insert([
+            { 
+              id: userId, 
+              business_name: businessName, 
+              category: industry, 
+              phone_number: phone 
+            }
+          ]);
+
+        if (insertError) {
+          setErrorMsg("Profile setup failed: " + insertError.message);
+          return;
+        }
+
+        alert("Onboarding Complete! Checking parameters.");
+        onLoginSuccess(data.user, { business_name: businessName, category: industry });
       }
     } catch (err) {
       console.error(err);
@@ -424,9 +448,4 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 
       {/* FOOTER AREA */}
       <footer className="py-6 px-6 border-t border-stone-200 bg-white text-center text-xs text-stone-400 font-semibold uppercase tracking-wider">
-        © 2026 Nyuki Flow Inc • Secured Regional Authentication Channels.
-      </footer>
-
-    </div>
-  );
-}
+        © 20
