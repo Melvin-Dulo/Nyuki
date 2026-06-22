@@ -60,26 +60,24 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
       
       {/* HEADER NAVIGATION */}
       <header id="landing-header" className="sticky top-0 z-50 bg-[#FDFBF7]/90 backdrop-blur-md border-b border-stone-200/80">
-       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-  <div className="flex items-center space-x-3">
-    <img
-      src="/nyuki-logo.png"
-      alt="Nyuki"
-      className="w-10 h-10 object-contain"
-    />
+          <div className="flex items-center space-x-3">
+            <img
+              src="/nyuki-logo.png"
+              alt="Nyuki"
+              className="w-10 h-10 object-contain"
+            />
 
-<div>
-  <span className="text-2xl font-bold tracking-tight text-stone-900 italic">
-    Nyuki
-  </span>
-  <span className="block text-[10px] font-bold text-amber-600 uppercase tracking-widest leading-none mt-0.5">
-    Bee First
-  </span>
-</div>
-
-  </div>
-
+            <div>
+              <span className="text-2xl font-bold tracking-tight text-stone-900 italic">
+                Nyuki
+              </span>
+              <span className="block text-[10px] font-bold text-amber-600 uppercase tracking-widest leading-none mt-0.5">
+                Bee First
+              </span>
+            </div>
+          </div>
 
           <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold text-stone-600">
             <a href="#features" className="hover:text-amber-600 transition-colors">Features</a>
@@ -123,13 +121,13 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               <span>Regional Launch: Supporting Kenya, Uganda & East Africa</span>
             </div>
 
-           <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
-  Find and Book Trusted Services<br/>
-  <span className="text-amber-600">Trusted Services.</span>
-           </h1>
-           
+            <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
+              Find and Book Trusted Services<br/>
+              <span className="text-amber-600">Trusted Services.</span>
+            </h1>
+            
             <p className="text-lg sm:text-xl text-stone-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
-  Discover trusted service providers, compare options, book appointments, and pay securely—all in one place with Nyuki.
+              Discover trusted service providers, compare options, book appointments, and pay securely—all in one place with Nyuki.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -193,11 +191,13 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
           <div className="grid md:grid-cols-3 gap-8">
             
             {/* Appointment Booking */}
-            <div className="bg-stone-850 p-8 rounded-2xl border border-stone-800 hover:border-amber-500/30 transition-all group">
+            <div className="bg-stone-800 p-8 rounded-2xl border border-stone-800 hover:border-amber-500/30 transition-all group">
               <div className="bg-amber-500/10 text-amber-500 p-4 rounded-xl w-14 h-14 flex items-center justify-center mb-6">
                 <Calendar className="w-8 h-8" />
               </div>
-              <h4 className="text-xl font-bold mb-3 text-white" Book Services Instantly
+              {/* FIXED LINE 200 SYNTX ERROR HERE */}
+              <h4 className="text-xl font-bold mb-3 text-white">
+                Book Services Instantly
               </h4>
               <p className="text-stone-400 text-sm leading-relaxed mb-6">
                 Find trusted providers, view available times, and book appointments in minutes from any device.
@@ -215,7 +215,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             </div>
 
             {/* Queue Board Engine */}
-            <div className="bg-stone-850 p-8 rounded-2xl border border-stone-800 hover:border-amber-500/30 transition-all group">
+            <div className="bg-stone-800 p-8 rounded-2xl border border-stone-800 hover:border-amber-500/30 transition-all group">
               <div className="bg-amber-500/10 text-amber-500 p-4 rounded-xl w-14 h-14 flex items-center justify-center mb-6">
                 <Clock className="w-8 h-8" />
               </div>
@@ -236,7 +236,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             </div>
 
             {/* Micro Alerts */}
-            <div className="bg-stone-850 p-8 rounded-2xl border border-stone-800 hover:border-amber-500/30 transition-all group">
+            <div className="bg-stone-800 p-8 rounded-2xl border border-stone-800 hover:border-amber-500/30 transition-all group">
               <div className="bg-amber-500/10 text-amber-500 p-4 rounded-xl w-14 h-14 flex items-center justify-center mb-6">
                 <Bell className="w-8 h-8" />
               </div>
@@ -311,7 +311,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                     <h4 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 text-white">
                       {ind.title} Customer Flow
                     </h4>
-                    <p className="text-stone-450 leading-relaxed text-sm mb-8">
+                    <p className="text-stone-400 leading-relaxed text-sm mb-8">
                       {ind.desc} Experience complete tenant-level security ensuring compliance, direct assignment trackers, and instant operational reporting.
                     </p>
 
@@ -350,7 +350,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             <h3 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight mb-4">
               Flexible Subscriptions with Trial Period
             </h3>
-            <p className="text-stone-650">
+            <p className="text-stone-600">
               Upgrade, downgrade, or cancel any time. Try medium or premium features for 30 days entirely free. No card requested.
             </p>
           </div>
@@ -366,7 +366,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 <div className="flex items-baseline mb-6">
                   <span className="text-sm font-semibold text-stone-500 mr-1">KES</span>
                   <span className="text-4xl font-black text-stone-900 tracking-tight">2,000</span>
-                  <span className="text-stone-450 font-bold text-xs ml-1">/mo</span>
+                  <span className="text-stone-400 font-bold text-xs ml-1">/mo</span>
                 </div>
                 <p className="text-stone-600 text-sm mb-8">
                   Perfect for local barbershops, independent clinical rooms, and small single-person centers.
@@ -387,7 +387,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                       <span>Appointment scheduling & core queueing</span>
                     </li>
                     <li className="flex items-center">
-                      <span className="text-amber-655 font-bold mr-2">✓</span>
+                      <span className="text-amber-600 font-bold mr-2">✓</span>
                       <span>SMS & email transaction triggers</span>
                     </li>
                   </ul>
@@ -407,13 +407,13 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 RECOMMENDED
               </div>
               <div>
-                <span className="inline-block bg-amber-500/15 text-amber-850 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-6">
+                <span className="inline-block bg-amber-500/15 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-6">
                   Medium Business
                 </span>
                 <div className="flex items-baseline mb-6">
                   <span className="text-sm font-semibold text-stone-500 mr-1">KES</span>
                   <span className="text-4xl font-black text-stone-900 tracking-tight">5,000</span>
-                  <span className="text-stone-450 font-bold text-xs ml-1">/mo</span>
+                  <span className="text-stone-400 font-bold text-xs ml-1">/mo</span>
                 </div>
                 <p className="text-stone-600 text-sm mb-8">
                   Designed for growing healthcare clinics, medium-scale salons, regional legal firms, and universities.
@@ -470,7 +470,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                       <span className="text-white">UNLIMITED STAFF ROLES</span>
                     </li>
                     <li className="flex items-center">
-                      <span className="text-amber-505 font-bold mr-2">✓</span>
+                      <span className="text-amber-500 font-bold mr-2">✓</span>
                       <span className="text-white">UNLIMITED bookings</span>
                     </li>
                     <li className="flex items-center">
@@ -542,7 +542,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
 
             <div>
               <h5 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Regional Reach</h5>
-              <ul className="space-y-2.5 text-xs text-stone-450">
+              <ul className="space-y-2.5 text-xs text-stone-400">
                 <li>Nairobi, Kenya</li>
                 <li>Mombasa Port</li>
                 <li>Kisumu Terminal</li>
@@ -552,7 +552,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
 
             <div>
               <h5 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Support & Contact</h5>
-              <p className="text-xs text-stone-450 mb-3">
+              <p className="text-xs text-stone-400 mb-3">
                 Reach us 24/7 for M-Pesa or Africa's Talking integrations:
               </p>
               <ul className="text-xs font-semibold text-stone-300 space-y-2">
