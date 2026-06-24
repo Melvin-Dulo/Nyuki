@@ -11,7 +11,9 @@ import {
   ChevronRight, 
   PhoneCall,
   Activity,
-  UserCheck
+  UserCheck,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import { BusinessPlan, UserRole } from "../types";
 
@@ -25,7 +27,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   const [isRegister, setIsRegister] = useState<boolean>(initialRolePreset === "admin");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("password");
-  
+  const [showPassword, setShowPassword] = useState(false);
   // Registration States
   const [businessName, setBusinessName] = useState<string>("");
   const [adminName, setAdminName] = useState<string>("");
@@ -332,10 +334,24 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
         Password *
       </label>
-      <input
-        type="password"
-        className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
-      />
+      <div className="relative">
+  <input
+    type={showPassword ? "text" : "password"}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 pr-12 text-sm"
+  />
+
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute right-3 top-1/2 -translate-y-1/2"
+  >
+    {showPassword ? (
+      <EyeOff className="w-4 h-4 text-stone-500" />
+    ) : (
+      <Eye className="w-4 h-4 text-stone-500" />
+    )}
+  </button>
+</div>
     </div>
 
     <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-800">
