@@ -389,8 +389,6 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 </>
 )}
 
-{accountType === "business" && (
-  <>
     {!isRegister ? (
             /* LOGIN CARD */
             <form onSubmit={handleLogin} className="space-y-5">
@@ -436,9 +434,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
               </button>
 
                       </form>
-          )}
-  </>
-)}
+      
           ) : (
             /* SIGNUP REGISTRATION FLOW */
             <form onSubmit={handleRegister} className="space-y-5">
