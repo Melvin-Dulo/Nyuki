@@ -438,7 +438,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
                 🛡️ Your 30-day Free Trial launches immediately. We will preseed diagnostic services & queue events so you have direct visual logs.
               </div>
 
-              <button
+            
                 id="btn-register-submit"
                 type="submit"
                 disabled={loading}
@@ -447,8 +447,6 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
                 {loading ? "Allocating Swarm..." : "Configure Free Trial Portal"}
               </button>
 
-            </form>
-                      )}
 
         </div>
 
