@@ -395,7 +395,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
                     }`}
                   >
                     <span className="block font-black text-xs">STANDARD</span>
-                    <span className="text-[10px] text-stone-500">KES 2,000/mo</span>
+                    <span className="text-[10px] text-stone-500">KES 2,500/mo</span>
                   </button>
 
                   <button
