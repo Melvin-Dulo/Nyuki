@@ -448,4 +448,8 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 
       {/* FOOTER AREA */}
       <footer className="py-6 px-6 border-t border-stone-200 bg-white text-center text-xs text-stone-400 font-semibold uppercase tracking-wider">
-        © 20
+  © 2026 Nyuki. All rights reserved.
+      </footer>
+          </div>
+  );
+}
