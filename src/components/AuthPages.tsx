@@ -386,7 +386,6 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
     </button>
 
   </div>
-)}
 
           {accountType === "business" ? (
             /* LOGIN CARD */
