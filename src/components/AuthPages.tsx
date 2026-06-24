@@ -385,9 +385,10 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
       Create Free Account
     </button>
 
-  </div>
+ </div>
+</>
 
-          {accountType === "business" ? (
+{!isRegister ? (
             /* LOGIN CARD */
             <form onSubmit={handleLogin} className="space-y-5">
               
