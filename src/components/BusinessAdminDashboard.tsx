@@ -633,14 +633,14 @@ export default function BusinessAdminDashboard({
                   <button
                     type="button"
                     disabled={stkLoading}
-                    onClick={() => handleTriggerSTKSim(BusinessPlan.STANDARD, 2000)}
+                    onClick={() => handleTriggerSTKSim(BusinessPlan.STANDARD, 2500)}
                     className="w-full flex justify-between items-center p-3 bg-[#faf8f5] hover:bg-stone-50 border border-stone-200 rounded-xl cursor-pointer text-left transition-all"
                   >
                     <div>
                       <span className="block font-bold text-stone-800 text-xs">STANDARD BUSINESS</span>
                       <span className="text-[10px] text-stone-500">Max 1,000 bookings/mo</span>
                     </div>
-                    <span className="font-black text-xs text-amber-800">KES 2,000</span>
+                    <span className="font-black text-xs text-amber-800">KES 2,500</span>
                   </button>
 
                   <button
