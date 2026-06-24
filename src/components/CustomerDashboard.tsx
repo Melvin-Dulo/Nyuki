@@ -362,65 +362,20 @@ export default function CustomerDashboard({ customerUser, onLogout }: CustomerDa
 
         </div>
 
-        {/* CUSTOMER BILLING METRIC & CLIENT APP NOTIFICATION MONITOR */}
-        <div className="lg:col-span-4 space-y-6">
-          
-          {/* SUBSCRIPTION PLAN OVERVIEW */}
-          <div className="bg-white rounded-2.5xl p-6 sm:p-8 border border-stone-200">
-            <h3 className="text-xs font-black text-stone-400 uppercase tracking-widest mb-4">Your Plan Status</h3>
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-sm font-bold text-stone-950">Active Tier:</span>
-              <span className="bg-stone-100 text-stone-800 text-xs font-black uppercase px-2.5 py-1 rounded-full border">
-                {customerUser.customerPlan || "STANDARD CLIENT"}
-              </span>
-            </div>
+{/* SUBSCRIPTION PLAN OVERVIEW */}
+<div className="bg-white rounded-2.5xl p-6 sm:p-8 border border-stone-200">
+  <h3 className="text-xs font-black text-stone-400 uppercase tracking-widest mb-4">
+    Account Status
+  </h3>
 
-            <div className="text-[11px] text-stone-550 leading-normal mb-4">
-              Includes queue tracking, SMS verification triggers, and dynamic slot selections. Max 10 bookings per month. Upgraded state ready.
-            </div>
+  <div className="flex justify-between items-center mb-4">
+    <span className="text-sm font-bold text-stone-950">Account Type:</span>
+    <span className="bg-emerald-100 text-emerald-800 text-xs font-black uppercase px-2.5 py-1 rounded-full border">
+      FREE CUSTOMER
+    </span>
+  </div>
 
-            <button className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-black text-xs py-2.5 rounded-xl border border-amber-600 cursor-pointer text-center select-none shadow shadow-amber-500/5">
-              Upgrade Premium (KES 500/mo)
-            </button>
-          </div>
-
-          {/* REALTIME SMS SIMULATION LOGBOX */}
-          <div className="bg-white rounded-2.5xl p-6 sm:p-8 border border-stone-200 space-y-4">
-            <h3 className="text-stone-900 font-extrabold text-sm uppercase tracking-tight flex items-center">
-              <Bell className="w-4 h-4 mr-2 text-amber-500 animate-pulse" />
-              <span>Simulated SMS Console Log</span>
-            </h3>
-
-            <p className="text-[10px] text-stone-550 leading-normal mt-1">
-              Test your simulated SMS broadcast triggers locally. These messages simulate real-time API integrations under the African Gateway!
-            </p>
-
-            <div className="bg-stone-950 border border-stone-800 text-amber-500 rounded-xl p-4.5 font-mono text-xs h-60 overflow-y-auto space-y-3 shadow-inner">
-              {notifLogs.length === 0 ? (
-                <div className="text-stone-600 leading-normal text-center pt-16">
-                  Waiting for SMS alerts...
-                </div>
-              ) : (
-                notifLogs.map(log => (
-                  <div key={log.id} className="border-b border-stone-900 pb-2.5 last:border-0">
-                    <div className="flex justify-between text-[8px] text-stone-500 font-sans uppercase font-bold">
-                      <span>SMS Gateway IP: 196.254...</span>
-                      <span>Delivery: {log.status}</span>
-                    </div>
-                    <div className="text-white text-[10.5px] font-sans break-words my-1 leading-normal">
-                      {log.message}
-                    </div>
-                    <span className="text-[8px] text-[#fbbf24]">{log.sentAt.split("T")[1].substring(0, 5)} hrs UTC</span>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-
-        </div>
-
-      </main>
-
-    </div>
-  );
-}
+  <div className="text-[11px] text-stone-550 leading-normal">
+    Enjoy unlimited appointment bookings, remote queue access, wait-time tracking, and service updates at no cost.
+  </div>
+</div>
