@@ -289,11 +289,70 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   </div>
 
 ) : (
-  <div className="mb-8 p-6 border rounded-xl bg-white">
-    <h3 className="font-black text-lg mb-2">👤 Customer Account</h3>
-    <p className="text-sm text-stone-500">
-      Customer registration form coming next.
-    </p>
+  <div className="mb-8 p-6 border rounded-xl bg-white space-y-5">
+
+    <h3 className="font-black text-lg">
+      👤 Create Free Customer Account
+    </h3>
+
+    <div>
+      <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+        Full Name *
+      </label>
+      <input
+        type="text"
+        placeholder="e.g. Peter Mwangi"
+        className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+      />
+    </div>
+
+    <div>
+      <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+        Phone Number *
+      </label>
+      <input
+        type="tel"
+        placeholder="+254712345678"
+        className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+      />
+    </div>
+
+    <div>
+      <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+        Email Address *
+      </label>
+      <input
+        type="email"
+        placeholder="peter@gmail.com"
+        className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+      />
+    </div>
+
+    <div>
+      <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+        Password *
+      </label>
+      <input
+        type="password"
+        className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+      />
+    </div>
+
+    <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-800">
+      ✓ Unlimited appointment bookings<br />
+      ✓ Remote queue access<br />
+      ✓ Wait-time tracking<br />
+      ✓ SMS service updates<br />
+      ✓ Free customer account
+    </div>
+
+    <button
+      type="button"
+      className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3 rounded-xl"
+    >
+      Create Free Account
+    </button>
+
   </div>
 )}
 
