@@ -379,9 +379,6 @@ export default function CustomerDashboard({ customerUser, onLogout }: CustomerDa
               Enjoy unlimited appointment bookings, remote queue access, wait-time tracking, and service updates at no cost.
             </div>
 
-            <button className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-black text-xs py-2.5 rounded-xl border border-amber-600 cursor-pointer text-center select-none shadow shadow-amber-500/5">
-              Free Customer Account
-            </button>
           </div>
 
           {/* REALTIME SMS SIMULATION LOGBOX */}
