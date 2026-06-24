@@ -371,16 +371,16 @@ export default function CustomerDashboard({ customerUser, onLogout }: CustomerDa
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm font-bold text-stone-950">Active Tier:</span>
               <span className="bg-stone-100 text-stone-800 text-xs font-black uppercase px-2.5 py-1 rounded-full border">
-                {customerUser.customerPlan || "STANDARD CLIENT"}
+                "FREE CUSTOMER"
               </span>
             </div>
 
             <div className="text-[11px] text-stone-550 leading-normal mb-4">
-              Includes queue tracking, SMS verification triggers, and dynamic slot selections. Max 10 bookings per month. Upgraded state ready.
+              Enjoy unlimited appointment bookings, remote queue access, wait-time tracking, and service updates at no cost.
             </div>
 
             <button className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-black text-xs py-2.5 rounded-xl border border-amber-600 cursor-pointer text-center select-none shadow shadow-amber-500/5">
-              Upgrade Premium (KES 500/mo)
+              Free Customer Account
             </button>
           </div>
 
