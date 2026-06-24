@@ -385,8 +385,9 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
       Create Free Account
     </button>
 
- </div>
+</div>
 </>
+)}
 
 {!isRegister ? (
             /* LOGIN CARD */
