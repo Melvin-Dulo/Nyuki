@@ -152,7 +152,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
     {
       roleLabel: "REGULAR CUSTOMER (Peter Mwangi)",
       email: "peter@example.com",
-      badge: "Standard Client",
+      badge: "Free Customer",
       color: "border-[#854d0e] hover:bg-amber-50/20"
     }
   ];
