@@ -271,10 +271,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
     onClick={() => setAccountType(null)}
     className="mb-4 text-sm font-bold text-amber-600 hover:text-amber-700"
   >
-    ← Back
-  </button>
-
-  <div className="flex border-b border-stone-200 mb-8">
+    
   ← Back
 </button>
   <div className="flex border-b border-stone-200 mb-8">
