@@ -498,7 +498,9 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
           <div className="mt-12 text-center bg-amber-50/60 border border-amber-500/15 p-6 rounded-2xl max-w-2xl mx-auto">
             <h4 className="text-sm font-bold text-stone-900 mb-1">Are you a regular customer/patient?</h4>
             <p className="text-xs text-stone-600">
-              Get <strong>STANDARD CLIENT free-line booking access</strong> up to 10 bookings/mo, or upgrade to <strong>PREMIUM CLIENT (KES 500/mo)</strong> for priority booking channels, zero limit actions, and automatic loyalty codes.
+              <p className="text-stone-600">
+  Create a free customer account to book appointments, join queues remotely, track wait times, and receive service updates at no cost.
+</p>
             </p>
           </div>
 
