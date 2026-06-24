@@ -297,8 +297,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   </div>
 )}
 
-          {accountType === "business" && (
-  !isRegister ? (
+          {!isRegister ? (
             /* LOGIN CARD */
             <form onSubmit={handleLogin} className="space-y-5">
               
@@ -475,7 +474,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
               </button>
 
             </form>
-          )}
+                      )}
 
         </div>
 
