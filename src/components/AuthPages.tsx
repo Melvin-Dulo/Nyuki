@@ -35,7 +35,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
-
+  const [accountType, setAccountType] = useState<"customer" | "business" | null>(null);
   const handleLogin = async (e: React.FormEvent, customEmail?: string) => {
     if (e) e.preventDefault();
     const loginEmail = customEmail || email;
@@ -234,36 +234,71 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
         <div className="lg:col-span-6 bg-white border border-stone-200 rounded-3.5xl p-8 sm:p-10 shadow-xl shadow-stone-200/50">
           
           {/* TABS CONTROLLER */}
-          <div className="flex border-b border-stone-200 mb-8">
-            <button
-              onClick={() => { setIsRegister(false); setErrorMsg(""); }}
-              className={`flex-1 text-center font-bold text-sm uppercase pb-4 cursor-pointer transition-all ${
-                !isRegister 
-                  ? "border-b-2 border-amber-500 text-stone-950" 
-                  : "text-stone-400 hover:text-stone-700"
-              }`}
-            >
-              Business Sign In
-            </button>
-            <button
-              onClick={() => { setIsRegister(true); setErrorMsg(""); }}
-              className={`flex-1 text-center font-bold text-sm uppercase pb-4 cursor-pointer transition-all ${
-                isRegister 
-                  ? "border-b-2 border-amber-500 text-stone-950" 
-                  : "text-stone-400 hover:text-stone-700"
-              }`}
-            >
-              Onboard My Business
-            </button>
-          </div>
+          {accountType === null ? (
+  <div className="space-y-4 mb-8">
 
-          {errorMsg && (
-            <div id="auth-error-alert" className="mb-6 p-4 bg-red-50 text-red-800 border-l-4 border-red-500 rounded-r-xl text-xs font-bold animate-pulse">
-              ⚠️ {errorMsg}
-            </div>
-          )}
+    <h3 className="text-center text-sm font-black uppercase tracking-wider text-stone-500">
+      Choose Account Type
+    </h3>
 
-          {!isRegister ? (
+    <button
+      onClick={() => setAccountType("customer")}
+      className="w-full p-5 border rounded-xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
+    >
+      <div className="font-black text-lg">👤 Customer</div>
+      <div className="text-sm text-stone-500">
+        Book appointments, join queues, and receive updates for free.
+      </div>
+    </button>
+
+    <button
+      onClick={() => setAccountType("business")}
+      className="w-full p-5 border rounded-xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
+    >
+      <div className="font-black text-lg">🏢 Business</div>
+      <div className="text-sm text-stone-500">
+        Manage appointments, staff, and customer queues.
+      </div>
+    </button>
+
+  </div>
+) : accountType === "business" ? (
+
+  <div className="flex border-b border-stone-200 mb-8">
+    <button
+      onClick={() => { setIsRegister(false); setErrorMsg(""); }}
+      className={`flex-1 text-center font-bold text-sm uppercase pb-4 cursor-pointer transition-all ${
+        !isRegister
+          ? "border-b-2 border-amber-500 text-stone-950"
+          : "text-stone-400 hover:text-stone-700"
+      }`}
+    >
+      Business Sign In
+    </button>
+
+    <button
+      onClick={() => { setIsRegister(true); setErrorMsg(""); }}
+      className={`flex-1 text-center font-bold text-sm uppercase pb-4 cursor-pointer transition-all ${
+        isRegister
+          ? "border-b-2 border-amber-500 text-stone-950"
+          : "text-stone-400 hover:text-stone-700"
+      }`}
+    >
+      Onboard My Business
+    </button>
+  </div>
+
+) : (
+  <div className="mb-8 p-6 border rounded-xl bg-white">
+    <h3 className="font-black text-lg mb-2">👤 Customer Account</h3>
+    <p className="text-sm text-stone-500">
+      Customer registration form coming next.
+    </p>
+  </div>
+)}
+
+          {accountType === "business" && (
+  !isRegister ? (
             /* LOGIN CARD */
             <form onSubmit={handleLogin} className="space-y-5">
               
