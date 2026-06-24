@@ -163,7 +163,7 @@ const DEFAULT_DB: DatabaseSchema = {
       name: "Pediatric Wellness Check",
       description: "Inoculation history review, growth tracking, and standard pediatric support.",
       durationMinutes: 30,
-      priceKES: 2000,
+      priceKES: 2500,
       assignedStaffIds: ["staff-gp"],
       isActive: true
     },
@@ -320,7 +320,7 @@ const DEFAULT_DB: DatabaseSchema = {
     {
       id: "inv-102",
       businessId: "taji-id",
-      amountKES: 2000,
+      amountKES: 2500,
       planName: "STANDARD BUSINESS PLAN",
       billingDate: "2026-06-01",
       dueDate: "2026-07-01",
