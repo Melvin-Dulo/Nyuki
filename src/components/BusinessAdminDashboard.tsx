@@ -35,8 +35,7 @@ import {
 } from "../types";
 import AnalyticsDashboardComponent from "./AnalyticsDashboardComponent";
 // Import your Supabase client instance
-import { supabase } from '../supabaseClient';
-
+import { supabase } from "../supabaseClient";
 interface BusinessAdminDashboardProps {
   business: Business;
   adminUser: User;
