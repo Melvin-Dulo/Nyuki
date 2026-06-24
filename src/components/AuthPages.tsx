@@ -265,7 +265,18 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 
   </div>
 ) : accountType === "business" ? (
+<>
+  <button
+    type="button"
+    onClick={() => setAccountType(null)}
+    className="mb-4 text-sm font-bold text-amber-600 hover:text-amber-700"
+  >
+    ← Back
+  </button>
 
+  <div className="flex border-b border-stone-200 mb-8">
+  ← Back
+</button>
   <div className="flex border-b border-stone-200 mb-8">
     <button
       onClick={() => { setIsRegister(false); setErrorMsg(""); }}
@@ -288,9 +299,17 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
     >
       Onboard My Business
     </button>
-  </div>
-
+    </div>
+</>
 ) : (
+<>
+  <button
+    type="button"
+    onClick={() => setAccountType(null)}
+    className="mb-4 text-sm font-bold text-amber-600 hover:text-amber-700"
+  >
+    ← Back
+  </button>
   <div className="mb-8 p-6 border rounded-xl bg-white space-y-5">
 
     <h3 className="font-black text-lg">
