@@ -365,7 +365,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 </span>
                 <div className="flex items-baseline mb-6">
                   <span className="text-sm font-semibold text-stone-500 mr-1">KES</span>
-                  <span className="text-4xl font-black text-stone-900 tracking-tight">2,000</span>
+                  <span className="text-4xl font-black text-stone-900 tracking-tight">2,500</span>
                   <span className="text-stone-400 font-bold text-xs ml-1">/mo</span>
                 </div>
                 <p className="text-stone-600 text-sm mb-8">
