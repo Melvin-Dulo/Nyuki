@@ -163,7 +163,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">Tenant & Staff Isolation</span>
               </div>
               <div>
-                <span className="block text-3xl font-black text-stone-900">KES 2,000</span>
+                <span className="block text-3xl font-black text-stone-900">KES 2,500</span>
                 <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">Lowest Entry Price/Mo</span>
               </div>
             </div>
