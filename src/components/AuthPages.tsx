@@ -389,7 +389,9 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 </>
 )}
 
-{!isRegister ? (
+{accountType === "business" && (
+  <>
+    {!isRegister ? (
             /* LOGIN CARD */
             <form onSubmit={handleLogin} className="space-y-5">
               
@@ -433,7 +435,10 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
                 {loading ? "Authenticating Hive..." : "Secure Access Token"}
               </button>
 
-            </form>
+                      </form>
+          )}
+  </>
+)}
           ) : (
             /* SIGNUP REGISTRATION FLOW */
             <form onSubmit={handleRegister} className="space-y-5">
