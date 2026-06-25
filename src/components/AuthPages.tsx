@@ -446,7 +446,9 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   {loading ? "Allocating Swarm..." : "Configure Free Trial Portal"}
 </button>
 
+</form>
 
+)}
 </div>
 
 </main>
