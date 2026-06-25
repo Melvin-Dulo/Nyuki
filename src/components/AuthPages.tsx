@@ -300,6 +300,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 </>
 ) : (
 <>
+  <>
   <button
     type="button"
     onClick={() => setAccountType(null)}
@@ -307,8 +308,8 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   >
     ← Back
   </button>
-  <div className="mb-8 p-6 border rounded-xl bg-white space-y-5">
 
+  <div className="mb-8 p-6 border rounded-xl bg-white space-y-5">
     <h3 className="font-black text-lg">
       👤 Create Free Customer Account
     </h3>
@@ -350,24 +351,25 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
         Password *
       </label>
-      <div className="relative">
-  <input
-    type={showPassword ? "text" : "password"}
-    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 pr-12 text-sm"
-  />
 
-  <button
-    type="button"
-    onClick={() => setShowPassword(!showPassword)}
-    className="absolute right-3 top-1/2 -translate-y-1/2"
-  >
-    {showPassword ? (
-      <EyeOff className="w-4 h-4 text-stone-500" />
-    ) : (
-      <Eye className="w-4 h-4 text-stone-500" />
-    )}
-  </button>
-</div>
+      <div className="relative">
+        <input
+          type={showPassword ? "text" : "password"}
+          className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 pr-12 text-sm"
+        />
+
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-3 top-1/2 -translate-y-1/2"
+        >
+          {showPassword ? (
+            <EyeOff className="w-4 h-4 text-stone-500" />
+          ) : (
+            <Eye className="w-4 h-4 text-stone-500" />
+          )}
+        </button>
+      </div>
     </div>
 
     <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-800">
@@ -384,8 +386,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
     >
       Create Free Account
     </button>
-
-</div>
+  </div>
 </>
 )}
 
