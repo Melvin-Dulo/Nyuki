@@ -297,6 +297,20 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
       Onboard My Business
     </button>
     </div>
+{!isRegister ? (
+  <form onSubmit={handleLogin} className="space-y-5">
+
+    {/* LOGIN FIELDS HERE */}
+
+  </form>
+) : (
+  <form onSubmit={handleRegister} className="space-y-5">
+
+    {/* REGISTRATION FIELDS HERE */}
+
+  </form>
+)}
+
 </>
 ) : (
 <>
