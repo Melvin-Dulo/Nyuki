@@ -432,20 +432,22 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
                     <span className="text-[10px] text-stone-500">KES 10,000/mo</span>
                   </button>
                 </div>
-              </div>
+             </div>
 
-              <div className="bg-amber-50/60 p-3 rounded-xl border border-amber-500/15 text-[10px] text-stone-600 font-medium">
-                🛡️ Your 30-day Free Trial launches immediately. We will preseed diagnostic services & queue events so you have direct visual logs.
-              </div>
+<div className="bg-amber-50/60 p-3 rounded-xl border border-amber-500/15 text-[10px] text-stone-600 font-medium">
+  🛡️ Your 30-day Free Trial launches immediately. We will preseed diagnostic services & queue events so you have direct visual logs.
+</div>
 
-            
-                id="btn-register-submit"
-                type="submit"
-                disabled={loading}
-                className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl transition-all shadow-md shadow-amber-500/15 cursor-pointer disabled:opacity-50 text-sm uppercase"
-              >
-                {loading ? "Allocating Swarm..." : "Configure Free Trial Portal"}
-              </button>
+<button
+  id="btn-register-submit"
+  type="submit"
+  disabled={loading}
+  className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl transition-all shadow-md shadow-amber-500/15 cursor-pointer disabled:opacity-50 text-sm uppercase"
+>
+  {loading ? "Allocating Swarm..." : "Configure Free Trial Portal"}
+</button>
+
+</form>
 
 
         </div>
