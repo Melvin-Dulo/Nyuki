@@ -387,8 +387,6 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
       Create Free Account
     </button>
   </div>
-</>
-)}
 
               {/* SELECT BUSINESS PLAN MATRIX FOR SIGNUP */}
               <div>
@@ -447,9 +445,6 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 >
   {loading ? "Allocating Swarm..." : "Configure Free Trial Portal"}
 </button>
-
-</form>
-
 
         </div>
 
