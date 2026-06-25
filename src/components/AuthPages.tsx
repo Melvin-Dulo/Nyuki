@@ -446,9 +446,13 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   {loading ? "Allocating Swarm..." : "Configure Free Trial Portal"}
 </button>
 
-        </div>
+</form>
 
-      </main>
+)}
+
+</div>
+
+</main>
 
       {/* FOOTER AREA */}
       <footer className="py-6 px-6 border-t border-stone-200 bg-white text-center text-xs text-stone-400 font-semibold uppercase tracking-wider">
