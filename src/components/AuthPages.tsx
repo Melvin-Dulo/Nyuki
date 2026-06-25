@@ -42,7 +42,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   const handleLogin = async (e: React.FormEvent, customEmail?: string) => {
     if (e) e.preventDefault();
     const loginEmail = customEmail || email;
-const loginPassword = customEmail ? password: loginPassword,
+const loginPassword = customEmail ? "password" : password;
 
 if (!loginEmail || !loginPassword) {
       setErrorMsg("Please enter email and password.");
