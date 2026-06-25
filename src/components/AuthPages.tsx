@@ -300,7 +300,6 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 </>
 ) : (
 <>
-  <>
   <button
     type="button"
     onClick={() => setAccountType(null)}
@@ -386,68 +385,8 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
     >
       Create Free Account
     </button>
-  </div>
-
-              {/* SELECT BUSINESS PLAN MATRIX FOR SIGNUP */}
-              <div>
-                <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">Select Your Trial Business Plan</label>
-                <div className="grid grid-cols-3 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPlan(BusinessPlan.STANDARD)}
-                    className={`p-3 text-left border rounded-xl cursor-pointer transition-all ${
-                      selectedPlan === BusinessPlan.STANDARD 
-                        ? "border-amber-500 bg-amber-500/10 text-stone-900" 
-                        : "border-stone-200 hover:border-stone-300"
-                    }`}
-                  >
-                    <span className="block font-black text-xs">STANDARD</span>
-                    <span className="text-[10px] text-stone-500">KES 2,500/mo</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPlan(BusinessPlan.MEDIUM)}
-                    className={`p-3 text-left border rounded-xl cursor-pointer transition-all ${
-                      selectedPlan === BusinessPlan.MEDIUM 
-                        ? "border-amber-500 bg-amber-500/10 text-stone-900" 
-                        : "border-stone-200 hover:border-stone-300"
-                    }`}
-                  >
-                    <span className="block font-black text-xs">MEDIUM</span>
-                    <span className="text-[10px] text-stone-500">KES 5,000/mo</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPlan(BusinessPlan.PREMIUM)}
-                    className={`p-3 text-left border rounded-xl cursor-pointer transition-all ${
-                      selectedPlan === BusinessPlan.PREMIUM 
-                        ? "border-amber-500 bg-amber-500/10 text-stone-900" 
-                        : "border-stone-200 hover:border-stone-300"
-                    }`}
-                  >
-                    <span className="block font-black text-xs">PREMIUM</span>
-                    <span className="text-[10px] text-stone-500">KES 10,000/mo</span>
-                  </button>
-                </div>
-             </div>
-
-<div className="bg-amber-50/60 p-3 rounded-xl border border-amber-500/15 text-[10px] text-stone-600 font-medium">
-  🛡️ Your 30-day Free Trial launches immediately. We will preseed diagnostic services & queue events so you have direct visual logs.
 </div>
-
-<button
-  id="btn-register-submit"
-  type="submit"
-  disabled={loading}
-  className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl transition-all shadow-md shadow-amber-500/15 cursor-pointer disabled:opacity-50 text-sm uppercase"
->
-  {loading ? "Allocating Swarm..." : "Configure Free Trial Portal"}
-</button>
-
-</form>
-
+</>
 )}
 </div>
 
