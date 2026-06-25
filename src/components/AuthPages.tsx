@@ -299,14 +299,183 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
     </div>
 {!isRegister ? (
   <form onSubmit={handleLogin} className="space-y-5">
+    <div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Business Email Address
+  </label>
 
-    {/* LOGIN FIELDS HERE */}
+  <input
+    type="email"
+    required
+    placeholder="admin@business.co.ke"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  />
+</div>
 
+<div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Password
+  </label>
+
+  <input
+    type="password"
+    required
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  />
+</div>
+
+<button
+  type="submit"
+  disabled={loading}
+  className="w-full bg-stone-950 hover:bg-stone-800 text-white font-bold py-3.5 rounded-xl transition-all"
+>
+  {loading ? "Signing In..." : "Business Sign In"}
+</button>
+ 
+  
   </form>
 ) : (
   <form onSubmit={handleRegister} className="space-y-5">
 
-    {/* REGISTRATION FIELDS HERE */}
+    <div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Business Name *
+  </label>
+
+  <input
+    type="text"
+    required
+    placeholder="e.g. AfyaCare Medical"
+    value={businessName}
+    onChange={(e) => setBusinessName(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  />
+</div>
+
+<div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Industry Sector
+  </label>
+
+  <select
+    value={industry}
+    onChange={(e) => setIndustry(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  >
+    <option value="Clinics/Hospitals">Clinics/Hospitals</option>
+    <option value="Salons/Barbershops">Salons/Barbershops</option>
+    <option value="SACCOs/Financial">SACCOs/Financial</option>
+    <option value="Universities">Universities/Colleges</option>
+    <option value="Government Offices">Government Offices</option>
+  </select>
+</div>
+
+<div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Admin Name *
+  </label>
+
+  <input
+    type="text"
+    required
+    placeholder="Jane Kamau"
+    value={adminName}
+    onChange={(e) => setAdminName(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  />
+</div>
+
+<div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Phone Number *
+  </label>
+
+  <input
+    type="tel"
+    required
+    placeholder="+254712345678"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  />
+</div>
+
+<div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Email Address *
+  </label>
+
+  <input
+    type="email"
+    required
+    placeholder="name@business.co.ke"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  />
+</div>
+
+<div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Password *
+  </label>
+
+  <input
+    type="password"
+    required
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
+  />
+</div>
+
+<div>
+  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
+    Select Your Trial Business Plan
+  </label>
+
+  <div className="grid grid-cols-3 gap-3">
+    <button
+      type="button"
+      onClick={() => setSelectedPlan(BusinessPlan.STANDARD)}
+      className="p-3 border rounded-xl"
+    >
+      STANDARD
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setSelectedPlan(BusinessPlan.MEDIUM)}
+      className="p-3 border rounded-xl"
+    >
+      MEDIUM
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setSelectedPlan(BusinessPlan.PREMIUM)}
+      className="p-3 border rounded-xl"
+    >
+      PREMIUM
+    </button>
+  </div>
+</div>
+
+<div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs">
+  🛡️ Your 30-day free trial starts immediately.
+</div>
+
+<button
+  type="submit"
+  disabled={loading}
+  className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl"
+>
+  {loading ? "Creating Account..." : "Configure Free Trial Portal"}
+</button>
 
   </form>
 )}
