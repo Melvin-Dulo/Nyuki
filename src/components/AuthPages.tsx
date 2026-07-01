@@ -201,38 +201,39 @@ if (!loginEmail || !loginPassword) {
             </p>
           </div>
 
-          {/* QUICK DEMO PROFILES BLOCK */}
-          <div id="demo-profiles-container" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xl shadow-stone-200/50">
-            <h3 className="text-xs font-black text-stone-400 uppercase tracking-widest mb-4 flex items-center">
-              <UserCheck className="w-4 h-4 mr-2 text-amber-500" />
-              <span>Click to Instant Login as Demorole:</span>
-            </h3>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              onClick={(e) => {
-  console.log("Demo clicked:", prof.email);
-  handleLogin(e, prof.email);
+         {quickDemoProfiles.map((prof, i) => (
+<button
+id={`btn-demo-prof-${i}`}
+key={prof.email}
+onClick={(e) => {
+console.log("Demo clicked:", prof.email);
+handleLogin(e, prof.email);
 }}
-                  disabled={loading}
-                  className={`border p-4 rounded-xl text-left transition-all ${prof.color} whitespace-normal leading-normal select-none cursor-pointer disabled:opacity-50`}
-                >
-                  <span className="block text-[10px] font-black tracking-wider text-amber-800 uppercase leading-none mb-1">
-                    {prof.badge}
-                  </span>
-                  <span className="block font-bold text-stone-900 text-sm leading-tight mb-2">
-                    {prof.roleLabel.split(" ")[0]} {prof.roleLabel.substring(prof.roleLabel.indexOf(" "))}
-                  </span>
-                  <span className="block text-stone-500 text-xs font-mono">{prof.email}</span>
-                </button>
-              ))}
-            </div>
+disabled={loading}
+className={`border p-4 rounded-xl text-left transition-all ${prof.color} whitespace-normal leading-normal select-none cursor-pointer disabled:opacity-50`}
 
-            <div className="mt-4 text-[11px] text-stone-450 text-center leading-normal">
-              No registration payload needed to test! Just click any button to skip auth forms. Password default is <code className="font-mono bg-stone-100 px-1 rounded">password</code>.
-            </div>
-          </div>
+>
 
-        </div>
+```
+<span className="block text-[10px] font-black tracking-wider text-amber-800 uppercase leading-none mb-1">
+```
+
+```
+  {prof.badge}
+</span>
+
+<span className="block font-bold text-stone-900 text-sm leading-tight mb-2">
+  {prof.roleLabel.split(" ")[0]}{" "}
+  {prof.roleLabel.substring(prof.roleLabel.indexOf(" "))}
+</span>
+
+<span className="block text-stone-500 text-xs font-mono">
+  {prof.email}
+</span>
+```
+
+  </button>
+))}
 
         {/* AUTHENTICATION SHADOW CARD OR ONBOARD FORM */}
         <div className="lg:col-span-6 bg-white border border-stone-200 rounded-3.5xl p-8 sm:p-10 shadow-xl shadow-stone-200/50">
