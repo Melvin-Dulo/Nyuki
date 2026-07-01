@@ -209,11 +209,10 @@ if (!loginEmail || !loginPassword) {
             </h3>
 
             <div className="grid sm:grid-cols-2 gap-4">
-              {quickDemoProfiles.map((prof, i) => (
-                <button
-                  id={`btn-demo-prof-${i}`}
-                  key={prof.email}
-                  onClick={(e) => handleLogin(e, prof.email)}
+              onClick={(e) => {
+  console.log("Demo clicked:", prof.email);
+  handleLogin(e, prof.email);
+}}
                   disabled={loading}
                   className={`border p-4 rounded-xl text-left transition-all ${prof.color} whitespace-normal leading-normal select-none cursor-pointer disabled:opacity-50`}
                 >
