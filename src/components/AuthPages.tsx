@@ -250,7 +250,7 @@ if (!loginEmail || !loginPassword) {
     </code>.
   </div>
 </div>
-
+</div>
 
         {/* AUTHENTICATION SHADOW CARD OR ONBOARD FORM */}
         <div className="lg:col-span-6 bg-white border border-stone-200 rounded-3.5xl p-8 sm:p-10 shadow-xl shadow-stone-200/50">
