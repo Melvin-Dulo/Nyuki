@@ -55,9 +55,9 @@ if (!loginEmail || !loginPassword) {
     try {
       // Direct Real-time Auth with Supabase
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: loginEmail,
-        password: password,
-      });
+  email: loginEmail,
+  password: loginPassword,
+});
 
       if (error) {
         setErrorMsg(error.message);
@@ -96,7 +96,7 @@ if (!loginEmail || !loginPassword) {
       // 1. Create Login Account in Supabase Auth Engine
       const { data, error } = await supabase.auth.signUp({
         email: email,
-        password: password, // Uses default development "password" block or state
+        password: loginPassword, // Uses default development "password" block or state
       });
 
       if (error) {
