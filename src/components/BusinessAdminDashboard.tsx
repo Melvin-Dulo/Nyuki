@@ -20,18 +20,11 @@ import {
   Sparkles,
   Award
 } from "lucide-react";
-import { 
-  Business, 
-  Service, 
-  User, 
-  Appointment, 
-  QueueEntry, 
-  Invoice, 
-  CareerApplication, 
-  AuditLog, 
-  UserRole, 
-  BusinessPlan, 
-  AppointmentStatus 
+import {
+  ...
+  AuditLog,
+  UserRole,
+  AppointmentStatus
 } from "../types";
 import AnalyticsDashboardComponent from "./AnalyticsDashboardComponent";
 // Import your Supabase client instance
@@ -627,49 +620,23 @@ export default function BusinessAdminDashboard({
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <span className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest">Select Plan Premium:</span>
-                  
-                  <button
-                    type="button"
-                    disabled={stkLoading}
-                    onClick={() => handleTriggerSTKSim(BusinessPlan.STANDARD, 2500)}
-                    className="w-full flex justify-between items-center p-3 bg-[#faf8f5] hover:bg-stone-50 border border-stone-200 rounded-xl cursor-pointer text-left transition-all"
-                  >
-                    <div>
-                      <span className="block font-bold text-stone-800 text-xs">STANDARD BUSINESS</span>
-                      <span className="text-[10px] text-stone-500">Max 1,000 bookings/mo</span>
-                    </div>
-                    <span className="font-black text-xs text-amber-800">KES 2,500</span>
-                  </button>
+           <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
+  <h4 className="font-black text-sm mb-2">
+    Transaction-Based Revenue Model
+  </h4>
 
-                  <button
-                    type="button"
-                    disabled={stkLoading}
-                    onClick={() => handleTriggerSTKSim(BusinessPlan.MEDIUM, 5000)}
-                    className="w-full flex justify-between items-center p-3 bg-[#faf8f5] hover:bg-stone-50 border border-stone-200 rounded-xl cursor-pointer text-left transition-all"
-                  >
-                    <div>
-                      <span className="block font-bold text-stone-850 text-xs font-black">MEDIUM BUSINESS</span>
-                      <span className="text-[10px] text-stone-500">Max 5,000 bookings/mo</span>
-                    </div>
-                    <span className="font-black text-xs text-amber-800">KES 5,000</span>
-                  </button>
+  <p className="text-xs text-stone-600">
+    Businesses join for free.
+  </p>
 
-                  <button
-                    type="button"
-                    disabled={stkLoading}
-                    onClick={() => handleTriggerSTKSim(BusinessPlan.PREMIUM, 10000)}
-                    className="w-full flex justify-between items-center p-3 bg-stone-900 border border-stone-800 text-white rounded-xl cursor-pointer text-left transition-all"
-                  >
-                    <div>
-                      <span className="block font-bold text-amber-500 text-xs uppercase font-black">PREMIUM BUSINESS</span>
-                      <span className="text-[10px] text-stone-400">Unlimited bookings/staff</span>
-                    </div>
-                    <span className="font-black text-xs text-amber-500">KES 10,000</span>
-                  </button>
-                </div>
+  <p className="text-xs text-stone-600 mt-2">
+    Customer Fee: 1% per booking (minimum KES 5)
+  </p>
 
+  <p className="text-xs text-stone-600">
+    Business Commission: 3% per completed booking (minimum KES 10)
+  </p>
+</div>
                 {stkStateMsg && (
                   <div id="stk-logs-alert" className="bg-[#faf8f5] p-3.5 rounded-xl border font-mono text-[10.5px] text-stone-700 leading-relaxed whitespace-normal break-words">
                     📋 Log Check: {stkStateMsg}
