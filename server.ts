@@ -5,8 +5,7 @@ import { createServer as createViteServer } from "vite";
 import { 
   UserRole, 
   AppointmentStatus, 
-  QueueStatus, 
-  BusinessPlan, 
+  QueueStatus,  
   CustomerPlan,
   Business, 
   User, 
@@ -50,7 +49,7 @@ const DEFAULT_DB: DatabaseSchema = {
       timezone: "EAT (UTC+3)",
       logoUrl: "",
       description: "A premier multi-specialty wellness clinic offering high-quality primary care, pediatrics, and emergency triage in Nairobi.",
-      activePlan: BusinessPlan.MEDIUM,
+      activePlan: "TRANSACTION_BASED",
       billingStatus: "Active",
       renewalDate: "2026-07-19"
     },
@@ -65,7 +64,7 @@ const DEFAULT_DB: DatabaseSchema = {
       timezone: "EAT (UTC+3)",
       logoUrl: "",
       description: "Bespoke haircare, custom locks, modern styling, and relaxing body aesthetics for premium professionals.",
-      activePlan: BusinessPlan.STANDARD,
+     activePlan: "TRANSACTION_BASED",
       billingStatus: "Trial",
       renewalDate: "2026-07-01"
     }
@@ -404,7 +403,7 @@ app.post("/api/auth/register-business", (req, res) => {
     timezone: "EAT (UTC+3)",
     logoUrl: "",
     description: `A registered provider in ${industry || "service delivery"}.`,
-    activePlan: plan || BusinessPlan.STANDARD,
+    activePlan: "TRANSACTION_BASED",
     billingStatus: "Trial",
     renewalDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]
   };
@@ -921,9 +920,7 @@ app.post("/api/billing/stk-push", (req, res) => {
   if (bz) {
     bz.billingStatus = "Active";
     bz.renewalDate = newInvoice.dueDate;
-    if (planName && planName.includes("STANDARD")) bz.activePlan = BusinessPlan.STANDARD;
-    else if (planName && planName.includes("MEDIUM")) bz.activePlan = BusinessPlan.MEDIUM;
-    else if (planName && planName.includes("PREMIUM")) bz.activePlan = BusinessPlan.PREMIUM;
+    bz.activePlan = "TRANSACTION_BASED";
   }
 
   // Record simulated logs
