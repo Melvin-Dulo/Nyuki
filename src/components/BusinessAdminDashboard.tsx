@@ -306,7 +306,7 @@ export default function BusinessAdminDashboard({
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
             <div className="overflow-hidden">
               <span className="block text-[11px] text-white font-bold leading-none truncate">{business.name}</span>
-              <span className="text-[9px] text-stone-400 font-medium block mt-1 truncate">Plan: {business.activePlan} ({business.billingStatus})</span>
+              <span className="text-[9px] text-stone-400 font-medium block mt-1 truncate">Revenue Model: Transaction-Based (1% Customer Fee + 3% Business Commission)</span>
             </div>
           </div>
 
