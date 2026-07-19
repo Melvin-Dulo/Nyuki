@@ -45,7 +45,7 @@ export interface Business {
   timezone: string;
   logoUrl?: string;
   description: string;
-  activePlan: BusinessPlan;
+ revenueModel: "TRANSACTION_BASED";
   billingStatus: "Active" | "Past Due" | "Trial";
   renewalDate: string;
 }
