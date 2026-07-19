@@ -211,30 +211,28 @@ export default function BusinessAdminDashboard({
     } catch (er) { console.error(er); }
   };
 
-  const handleTriggerSTKSim = async (plan: BusinessPlan, price: number) => {
+  const handleTriggerSTKSim = async (amount: number) => {
     setStkLoading(true);
     setStkStateMsg("Contacting Safaricom Daraja STK Gateways...");
     try {
       const res = await fetch("/api/billing/stk-push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          businessId: business.id,
-          phone: phoneForSTK,
-          amountKES: price,
-          planName: `${plan} BUSINESS PLAN`
-        })
+       body: JSON.stringify({
+  businessId: business.id,
+  phone: phoneForSTK,
+  amountKES: amount,
+  description: "Transaction-Based Marketplace Fee"
+})
       });
 
       if (res.ok) {
         const payload = await res.json();
         setStkStateMsg(`STK PUSH EXECUTED! KES ${price} billed. Safaricom terminal reference: ${payload.referenceId || "N/A"}.`);
-        onUpdateBusiness({
-          ...business,
-          activePlan: plan,
-          billingStatus: "Active",
-          renewalDate: payload.invoice?.dueDate || "30 Days"
-        });
+       onUpdateBusiness({
+  ...business,
+  revenueModel: "TRANSACTION_BASED"
+});
         const invRes = await fetch(`/api/billing/invoices?businessId=${business.id}`);
         if (invRes.ok) setInvoices(await invRes.json());
       } else {
