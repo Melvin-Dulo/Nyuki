@@ -26,12 +26,6 @@ export enum QueueStatus {
   COMPLETED = "Completed"
 }
 
-export enum BusinessPlan {
-  STANDARD = "STANDARD",
-  MEDIUM = "MEDIUM",
-  PREMIUM = "PREMIUM"
-}
-
 export enum CustomerPlan {
   STANDARD = "STANDARD",
   PREMIUM = "PREMIUM"
