@@ -33,8 +33,6 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   const [adminName, setAdminName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [industry, setIndustry] = useState<string>("Clinics/Hospitals");
-  const [selectedPlan, setSelectedPlan] = useState<BusinessPlan>(BusinessPlan.MEDIUM);
-
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [accountType, setAccountType] = useState<"customer" | "business" | null>(null);
@@ -453,40 +451,25 @@ if (!loginEmail || !loginPassword) {
   />
 </div>
 
-<div>
-  <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
-    Select Your Trial Business Plan
-  </label>
+<div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3">
+  <h4 className="font-black text-sm text-stone-900">
+    Free Business Account
+  </h4>
 
-  <div className="grid grid-cols-3 gap-3">
-    <button
-      type="button"
-      onClick={() => setSelectedPlan(BusinessPlan.STANDARD)}
-      className="p-3 border rounded-xl"
-    >
-      STANDARD
-    </button>
+  <ul className="text-xs text-stone-600 space-y-1">
+    <li>✓ Free registration</li>
+    <li>✓ Appointment management</li>
+    <li>✓ Virtual queue management</li>
+    <li>✓ Online bookings</li>
+    <li>✓ Customer notifications</li>
+    <li>✓ M-Pesa payments</li>
+  </ul>
 
-    <button
-      type="button"
-      onClick={() => setSelectedPlan(BusinessPlan.MEDIUM)}
-      className="p-3 border rounded-xl"
-    >
-      MEDIUM
-    </button>
-
-    <button
-      type="button"
-      onClick={() => setSelectedPlan(BusinessPlan.PREMIUM)}
-      className="p-3 border rounded-xl"
-    >
-      PREMIUM
-    </button>
+  <div className="border-t border-amber-200 pt-3 text-xs font-semibold text-stone-700">
+    Customer Fee: 1% per booking (minimum KES 5)
+    <br />
+    Business Commission: 3% per completed booking (minimum KES 10)
   </div>
-</div>
-
-<div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs">
-  🛡️ Your 30-day free trial starts immediately.
 </div>
 
 <button
@@ -494,7 +477,7 @@ if (!loginEmail || !loginPassword) {
   disabled={loading}
   className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl"
 >
-  {loading ? "Creating Account..." : "Configure Free Trial Portal"}
+  {loading ? "Creating Account..." : "Create Free Business Account"}
 </button>
 
   </form>
