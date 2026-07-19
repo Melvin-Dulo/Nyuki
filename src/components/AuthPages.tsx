@@ -15,7 +15,7 @@ import {
   Eye,
   EyeOff
 } from "lucide-react";
-import { BusinessPlan, UserRole } from "../types";
+import { UserRole } from "../types";
 
 interface AuthPagesProps {
   onNavigate: (view: string) => void;
