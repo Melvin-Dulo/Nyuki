@@ -75,9 +75,7 @@ export default function CustomerDashboard({ customerUser, onLogout }: CustomerDa
             operatingHours: { start: "09:00", end: "20:00" },
             timezone: "EAT (UTC+3)",
             description: "Bespoke haircare, custom locks, modern styling, and relaxing body aesthetics.",
-            activePlan: "STANDARD" as any,
-            billingStatus: "Active",
-            renewalDate: "2026-07-01"
+            revenueModel: "TRANSACTION_BASED",
           }
         ]);
         setSelectedBusiness(dummy.business);
