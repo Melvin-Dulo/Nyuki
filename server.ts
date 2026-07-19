@@ -441,8 +441,7 @@ app.post("/api/auth/register-business", (req, res) => {
   });
 
   db.auditLogs.push({
-    id: "aud-" + Math.random().toString(36).substrin
-    g(2, 9),
+    id: "aud-" + Math.random().toString(36).substring(2, 9),
     userId,
     userName: adminName,
     action: `Registered new business ${businessName} with ${newBusiness.activePlan} Plan.`,
