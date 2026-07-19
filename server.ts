@@ -433,7 +433,7 @@ app.post("/api/auth/register-business", (req, res) => {
     id: "inv-" + Math.random().toString(36).substring(2, 9),
     businessId,
     amountKES: 0,
-    planName: `${newBusiness.activePlan} FREE TRIAL`,
+   planName: `Transaction-Based Business Account`,
     billingDate: new Date().toISOString().split("T")[0],
     dueDate: newBusiness.renewalDate,
     status: "Paid",
@@ -444,7 +444,7 @@ app.post("/api/auth/register-business", (req, res) => {
     id: "aud-" + Math.random().toString(36).substring(2, 9),
     userId,
     userName: adminName,
-    action: `Registered new business ${businessName} with ${newBusiness.activePlan} Plan.`,
+    action: `Registered new business ${businessName} under the transaction-based revenue model.`,
     timestamp: new Date().toISOString()
   });
 
