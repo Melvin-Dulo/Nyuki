@@ -49,9 +49,7 @@ const DEFAULT_DB: DatabaseSchema = {
       timezone: "EAT (UTC+3)",
       logoUrl: "",
       description: "A premier multi-specialty wellness clinic offering high-quality primary care, pediatrics, and emergency triage in Nairobi.",
-      activePlan: "TRANSACTION_BASED",
-      billingStatus: "Active",
-      renewalDate: "2026-07-19"
+  
     },
     {
       id: "taji-id",
@@ -64,9 +62,7 @@ const DEFAULT_DB: DatabaseSchema = {
       timezone: "EAT (UTC+3)",
       logoUrl: "",
       description: "Bespoke haircare, custom locks, modern styling, and relaxing body aesthetics for premium professionals.",
-     activePlan: "TRANSACTION_BASED",
-      billingStatus: "Trial",
-      renewalDate: "2026-07-01"
+    
     }
   ],
   users: [
@@ -403,9 +399,7 @@ app.post("/api/auth/register-business", (req, res) => {
     timezone: "EAT (UTC+3)",
     logoUrl: "",
     description: `A registered provider in ${industry || "service delivery"}.`,
-    activePlan: "TRANSACTION_BASED",
-    billingStatus: "Trial",
-    renewalDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]
+  
   };
 
   const newAdmin: User = {
@@ -447,7 +441,8 @@ app.post("/api/auth/register-business", (req, res) => {
   });
 
   db.auditLogs.push({
-    id: "aud-" + Math.random().toString(36).substring(2, 9),
+    id: "aud-" + Math.random().toString(36).substrin
+    g(2, 9),
     userId,
     userName: adminName,
     action: `Registered new business ${businessName} with ${newBusiness.activePlan} Plan.`,
@@ -883,9 +878,6 @@ app.post("/api/billing/upgrade", (req, res) => {
   const bIdx = db.businesses.findIndex(b => b.id === businessId);
   if (bIdx === -1) return res.status(404).json({ error: "Business profile not found." });
 
-  db.businesses[bIdx].activePlan = plan;
-  db.businesses[bIdx].billingStatus = "Active";
-  db.businesses[bIdx].renewalDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
 
   saveDB(db);
   res.json(db.businesses[bIdx]);
@@ -918,9 +910,7 @@ app.post("/api/billing/stk-push", (req, res) => {
 
   // Upgrade business status automatically on payment
   if (bz) {
-    bz.billingStatus = "Active";
-    bz.renewalDate = newInvoice.dueDate;
-    bz.activePlan = "TRANSACTION_BASED";
+  
   }
 
   // Record simulated logs
