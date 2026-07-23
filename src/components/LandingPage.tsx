@@ -351,7 +351,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               Transaction-Based Pricing
             </h3>
             <p className="text-stone-600">
-              No monthly subscription required. Businesses pay a 2% commission on completed bookings while customers pay a 1% booking fee.
+              Free to join for everyone. Businesses pay a simple 2% commission per completed booking, and customers pay a transparent 1% booking fee (min KES 5, max KES 500).
             </p>
           </div>
 
