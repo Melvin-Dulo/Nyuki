@@ -46,8 +46,6 @@ export interface Business {
   logoUrl?: string;
   description: string;
  revenueModel: "TRANSACTION_BASED";
-  billingStatus: "Active" | "Past Due" | "Trial";
-  renewalDate: string;
 }
 
 export interface User {
