@@ -116,7 +116,6 @@ const DEFAULT_DB: DatabaseSchema = {
       name: "Peter Mwangi",
       role: UserRole.CUSTOMER,
       phone: "+254 711 222333",
-      customerPlan: CustomerPlan.STANDARD,
       monthlyBookingsCount: 4
     },
     {
@@ -125,7 +124,6 @@ const DEFAULT_DB: DatabaseSchema = {
       name: "Alice Achieng",
       role: UserRole.CUSTOMER,
       phone: "+254 733 444555",
-      customerPlan: CustomerPlan.PREMIUM,
       monthlyBookingsCount: 8
     }
   ],
