@@ -6,7 +6,6 @@ import {
   UserRole, 
   AppointmentStatus, 
   QueueStatus,  
-  CustomerPlan,
   Business, 
   User, 
   Service, 
