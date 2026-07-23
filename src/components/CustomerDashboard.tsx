@@ -252,7 +252,7 @@ export default function CustomerDashboard({ customerUser, onLogout }: CustomerDa
                       <p className="text-[11px] text-stone-500 leading-normal">{bz.description.substring(0, 100)}...</p>
                       <div className="mt-3 text-[10px] text-stone-450 flex justify-between items-center font-semibold">
                         <span>{bz.industry}</span>
-                        <span className="text-amber-800 uppercase text-[9px]">Trial active</span>
+                        <span className="text-amber-800 uppercase text-[9px]">Active Account</span>
                       </div>
                     </div>
                   ))}
@@ -369,7 +369,7 @@ export default function CustomerDashboard({ customerUser, onLogout }: CustomerDa
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm font-bold text-stone-950">Active Tier:</span>
               <span className="bg-stone-100 text-stone-800 text-xs font-black uppercase px-2.5 py-1 rounded-full border">
-                "FREE CUSTOMER"
+                "CUSTOMER ACCOUNT"
               </span>
             </div>
 
