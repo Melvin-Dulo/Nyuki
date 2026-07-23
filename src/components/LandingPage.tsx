@@ -100,7 +100,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               onClick={() => onOpenAuth("admin")} 
               className="bg-stone-950 text-[#faf8f5] hover:bg-stone-800 border-2 border-stone-950 font-semibold text-sm px-5 py-2.5 rounded-xl transition-all shadow-md cursor-pointer"
             >
-              Start Free Trial
+              Get Started Free
             </button>
           </div>
 
@@ -348,10 +348,10 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
           <div className="text-center max-w-2xl mx-auto mb-20">
             <h2 className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3">Clear KES Billing</h2>
             <h3 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight mb-4">
-              Flexible Subscriptions with Trial Period
+              Transaction-Based Pricing
             </h3>
             <p className="text-stone-600">
-              Upgrade, downgrade, or cancel any time. Try medium or premium features for 30 days entirely free. No card requested.
+              No monthly subscription required. Businesses pay a 2% commission on completed bookings while customers pay a 1% booking fee.
             </p>
           </div>
 
@@ -444,7 +444,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 onClick={() => onOpenAuth("admin")}
                 className="mt-8 w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl transition-all shadow-md shadow-amber-500/10 cursor-pointer"
               >
-                Sign Up Medium (Trial Live)
+                Register Business Free
               </button>
             </div>
 
