@@ -15,7 +15,7 @@ import {
   CheckCircle,
   Ticket
 } from "lucide-react";
-import { Service, Appointment, QueueEntry, Business, CustomerPlan } from "../types";
+import { Service, Appointment, QueueEntry, Business } from "../types";
 
 interface CustomerDashboardProps {
   customerUser: any;
