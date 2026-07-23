@@ -597,7 +597,7 @@ export default function BusinessAdminDashboard({
             
             <div className="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200">
               <h2 className="text-stone-900 font-black text-lg uppercase mb-2">Safaricom M-Pesa STK Integration Console</h2>
-              <p className="text-stone-500 text-xs">Verify invoices, auto-renew trials, and upgrade your SaaS business level seamlessly using M-Pesa STK push simulations.</p>
+              <p className="text-stone-500 text-xs">Review transaction records, commission activity, and customer payment history.</p>
             </div>
 
             <div className="grid lg:grid-cols-12 gap-8 items-start">
