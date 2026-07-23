@@ -34,7 +34,7 @@ interface DatabaseSchema {
   auditLogs: AuditLog[];
 }
 
-// Initial state of seed data to provide a fully rich trial environment immediately
+// Initial seed data to demonstrate the transaction-based marketplace environment
 const DEFAULT_DB: DatabaseSchema = {
   businesses: [
     {
@@ -851,7 +851,7 @@ app.get("/api/notifications/logs", (req, res) => {
   res.json(db.notificationLogs.reverse());
 });
 
-// --- BILLING, SUBSCRIPTIONS & M-PESA INTEGRATION ---
+// --- TRANSACTIONS, COMMISSIONS & M-PESA INTEGRATION ---
 app.get("/api/billing/invoices", (req, res) => {
   const { businessId } = req.query;
   const db = loadDB();
