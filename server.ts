@@ -861,21 +861,6 @@ app.get("/api/billing/invoices", (req, res) => {
   res.json(db.invoices.reverse());
 });
 
-app.post("/api/billing/upgrade", (req, res) => {
-  const { businessId, plan } = req.body;
-  if (!businessId || !plan) {
-    return res.status(400).json({ error: "Business ID and plan designator are required." });
-  }
-
-  const db = loadDB();
-  const bIdx = db.businesses.findIndex(b => b.id === businessId);
-  if (bIdx === -1) return res.status(404).json({ error: "Business profile not found." });
-
-
-  saveDB(db);
-  res.json(db.businesses[bIdx]);
-});
-
 // Localized M-Pesa STK Push Simulation Endpoint with SMS/Delivery Logs
 app.post("/api/billing/stk-push", (req, res) => {
   const { businessId, phone, amountKES } = req.body;
@@ -899,11 +884,6 @@ app.post("/api/billing/stk-push", (req, res) => {
 };
 
   db.invoices.push(newInvoice);
-
-  // Upgrade business status automatically on payment
-  if (bz) {
-  
-  }
 
   // Record simulated logs
   db.notificationLogs.push({
