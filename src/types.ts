@@ -26,10 +26,6 @@ export enum QueueStatus {
   COMPLETED = "Completed"
 }
 
-export enum CustomerPlan {
-  STANDARD = "STANDARD",
-  PREMIUM = "PREMIUM"
-}
 
 export interface Business {
   id: string;
@@ -55,7 +51,6 @@ export interface User {
   role: UserRole;
   businessId?: string; // Standard isolation
   phone?: string;
-  customerPlan?: CustomerPlan;
   monthlyBookingsCount: number;
 }
 
@@ -122,7 +117,6 @@ export interface Invoice {
   status: "Paid" | "Pending";
   paymentMethod: "M-Pesa STK" | "M-Pesa Paybill" | "Credit Card" | "Debit Card";
 }
-
 export interface CareerApplication {
   id: string;
   name: string;
