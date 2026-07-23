@@ -132,18 +132,17 @@ if (!loginEmail || !loginPassword) {
       setLoading(false);
     }
   };
-
   const quickDemoProfiles = [
     {
       roleLabel: "BUSINESS ADMIN (AfyaCare Clinic)",
       email: "admin@afyacare.co.ke",
-      badge: "Medium Plan Trial",
+      badge: "Business Admin Demo",
       color: "border-emerald-500 hover:bg-emerald-50/20"
     },
     {
       roleLabel: "BUSINESS ADMIN (Taji Hair Studio)",
       email: "kendi@tajistudio.com",
-      badge: "Standard Plan Trial",
+      badge: "Business Admin Demo",
       color: "border-amber-500 hover:bg-amber-50/20"
     },
     {
