@@ -362,22 +362,6 @@ export default function CustomerDashboard({ customerUser, onLogout }: CustomerDa
 
  {/* CUSTOMER BILLING METRIC & CLIENT APP NOTIFICATION MONITOR */}
         <div className="lg:col-span-4 space-y-6">
-          
-          {/* SUBSCRIPTION PLAN OVERVIEW */}
-          <div className="bg-white rounded-2.5xl p-6 sm:p-8 border border-stone-200">
-            <h3 className="text-xs font-black text-stone-400 uppercase tracking-widest mb-4">Your Plan Status</h3>
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-sm font-bold text-stone-950">Active Tier:</span>
-              <span className="bg-stone-100 text-stone-800 text-xs font-black uppercase px-2.5 py-1 rounded-full border">
-                "CUSTOMER ACCOUNT"
-              </span>
-            </div>
-
-            <div className="text-[11px] text-stone-550 leading-normal mb-4">
-              Enjoy unlimited appointment bookings, remote queue access, wait-time tracking, and service updates at no cost.
-            </div>
-
-          </div>
 
           {/* REALTIME SMS SIMULATION LOGBOX */}
           <div className="bg-white rounded-2.5xl p-6 sm:p-8 border border-stone-200 space-y-4">
