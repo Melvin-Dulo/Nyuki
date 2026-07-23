@@ -300,25 +300,23 @@ const DEFAULT_DB: DatabaseSchema = {
   ],
   invoices: [
     {
-      id: "inv-101",
-      businessId: "afyacare-id",
-      amountKES: 5000,
-      planName: "MEDIUM BUSINESS PLAN",
-      billingDate: "2026-06-19",
-      dueDate: "2026-07-19",
-      status: "Paid",
-      paymentMethod: "M-Pesa STK"
-    },
-    {
-      id: "inv-102",
-      businessId: "taji-id",
-      amountKES: 2500,
-      planName: "STANDARD BUSINESS PLAN",
-      billingDate: "2026-06-01",
-      dueDate: "2026-07-01",
-      status: "Pending",
-      paymentMethod: "M-Pesa STK"
-    }
+  id: "inv-101",
+  businessId: "afyacare-id",
+  amountKES: 120,
+  description: "Business Commission - Completed Bookings",
+  transactionDate: "2026-06-19",
+  status: "Paid",
+  paymentMethod: "M-Pesa STK"
+},
+{
+  id: "inv-102",
+  businessId: "taji-id",
+  amountKES: 85,
+  description: "Business Commission - Completed Bookings",
+  transactionDate: "2026-06-01",
+  status: "Pending",
+  paymentMethod: "M-Pesa STK"
+}
   ],
   careerApplications: [
     {
@@ -425,17 +423,16 @@ app.post("/api/auth/register-business", (req, res) => {
   db.users.push(newAdmin);
   db.services.push(defaultService);
 
-  // Initial free trial invoice
-  db.invoices.push({
-    id: "inv-" + Math.random().toString(36).substring(2, 9),
-    businessId,
-    amountKES: 0,
-   planName: `Transaction-Based Business Account`,
-    billingDate: new Date().toISOString().split("T")[0],
-    dueDate: newBusiness.renewalDate,
-    status: "Paid",
-    paymentMethod: "M-Pesa STK"
-  });
+// Initial business registration record
+db.invoices.push({
+  id: "inv-" + Math.random().toString(36).substring(2, 9),
+  businessId,
+  amountKES: 0,
+  description: "Business Account Registration",
+  transactionDate: new Date().toISOString().split("T")[0],
+  status: "Paid",
+  paymentMethod: "M-Pesa STK"
+});
 
   db.auditLogs.push({
     id: "aud-" + Math.random().toString(36).substring(2, 9),
@@ -881,7 +878,7 @@ app.post("/api/billing/upgrade", (req, res) => {
 
 // Localized M-Pesa STK Push Simulation Endpoint with SMS/Delivery Logs
 app.post("/api/billing/stk-push", (req, res) => {
-  const { businessId, phone, amountKES, planName } = req.body;
+  const { businessId, phone, amountKES } = req.body;
   if (!businessId || !phone || !amountKES) {
     return res.status(400).json({ error: "Phone number and KES Amount are mandatory." });
   }
@@ -891,16 +888,15 @@ app.post("/api/billing/stk-push", (req, res) => {
 
   // M-Pesa Safaricom Daraja STK execution transaction logs
   const txRef = "MPESA-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-  const newInvoice: Invoice = {
-    id: "inv-" + Math.floor(1000 + Math.random() * 9000),
-    businessId,
-    amountKES: Number(amountKES),
-    planName: planName || "Subscription Renewal",
-    billingDate: new Date().toISOString().split("T")[0],
-    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-    status: "Paid",
-    paymentMethod: "M-Pesa STK"
-  };
+ const newInvoice: Invoice = {
+  id: "inv-" + Math.floor(1000 + Math.random() * 9000),
+  businessId,
+  amountKES: Number(amountKES),
+  description: "Marketplace Transaction Fee",
+  transactionDate: new Date().toISOString().split("T")[0],
+  status: "Paid",
+  paymentMethod: "M-Pesa STK"
+};
 
   db.invoices.push(newInvoice);
 
@@ -915,7 +911,7 @@ app.post("/api/billing/stk-push", (req, res) => {
     businessId,
     type: "SMS",
     recipient: phone,
-    message: `LIPA NA M-PESA Confirmed. NYUKI received KES ${amountKES} for ${planName || "Service Subscription"}. Ref: ${txRef}. Current expiry is ${newInvoice.dueDate}.`,
+message: `LIPA NA M-PESA Confirmed. NYUKI received KES ${amountKES}. Ref: ${txRef}. Transaction recorded successfully.`,
     eventType: "billing",
     status: "Sent",
     sentAt: new Date().toISOString()
