@@ -117,10 +117,9 @@ export interface Invoice {
   businessId?: string;
   customerId?: string;
   amountKES: number;
-  planName: string;
-  billingDate: string;
-  dueDate: string;
-  status: "Paid" | "Unpaid" | "Pending";
+  description: string;
+  transactionDate: string;
+  status: "Paid" | "Pending";
   paymentMethod: "M-Pesa STK" | "M-Pesa Paybill" | "Credit Card" | "Debit Card";
 }
 
