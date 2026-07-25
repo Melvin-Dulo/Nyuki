@@ -384,6 +384,8 @@ app.post("/api/auth/register-business", (req, res) => {
   const userId = "usr-" + Math.random().toString(36).substring(2, 9);
 
 const newBusiness: Business = {
+  const foundingBusinessCount = db.businesses.length;
+const qualifiesForFoundingPartner = foundingBusinessCount < 100;
   id: businessId,
   name: businessName,
   industry: industry || "Clinics/Hospitals",
@@ -396,8 +398,10 @@ const newBusiness: Business = {
   description: `A registered provider in ${industry || "service delivery"}.`,
   revenueModel: "TRANSACTION_BASED",
 
-  isFoundingPartner: false,
-  foundingExpiresAt: undefined
+  isFoundingPartner: qualifiesForFoundingPartner,
+foundingExpiresAt: qualifiesForFoundingPartner
+  ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+  : undefined
 };
 
   const newAdmin: User = {
