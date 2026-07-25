@@ -55,6 +55,8 @@ export interface User {
   businessId?: string; // Standard isolation
   phone?: string;
   monthlyBookingsCount: number;
+isFoundingMember?: boolean;
+foundingExpiresAt?: string;
 }
 
 export interface Service {
