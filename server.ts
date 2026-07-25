@@ -383,19 +383,22 @@ app.post("/api/auth/register-business", (req, res) => {
   const businessId = "bz-" + Math.random().toString(36).substring(2, 9);
   const userId = "usr-" + Math.random().toString(36).substring(2, 9);
 
-  const newBusiness: Business = {
-    id: businessId,
-    name: businessName,
-    industry: industry || "Clinics/Hospitals",
-    address: "Regus Suite Area, Nairobi",
-    email,
-    phone,
-    operatingHours: { start: "08:00", end: "17:00" },
-    timezone: "EAT (UTC+3)",
-    logoUrl: "",
-    description: `A registered provider in ${industry || "service delivery"}.`,
-  
-  };
+const newBusiness: Business = {
+  id: businessId,
+  name: businessName,
+  industry: industry || "Clinics/Hospitals",
+  address: "Regus Suite Area, Nairobi",
+  email,
+  phone,
+  operatingHours: { start: "08:00", end: "17:00" },
+  timezone: "EAT (UTC+3)",
+  logoUrl: "",
+  description: `A registered provider in ${industry || "service delivery"}.`,
+  revenueModel: "TRANSACTION_BASED",
+
+  isFoundingPartner: false,
+  foundingExpiresAt: undefined
+};
 
   const newAdmin: User = {
     id: userId,
