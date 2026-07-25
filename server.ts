@@ -110,23 +110,26 @@ const DEFAULT_DB: DatabaseSchema = {
       phone: "+254 722 555444",
       monthlyBookingsCount: 180
     },
+   {
+  id: "cust-1",
+  email: "peter@example.com",
+  name: "Peter Mwangi",
+  role: UserRole.CUSTOMER,
+  phone: "+254 711 222333",
+  monthlyBookingsCount: 4,
+  isFoundingMember: true,
+  foundingExpiresAt: "2026-08-31"
+},
     {
-      id: "cust-1",
-      email: "peter@example.com",
-      name: "Peter Mwangi",
-      role: UserRole.CUSTOMER,
-      phone: "+254 711 222333",
-      monthlyBookingsCount: 4
-    },
-    {
-      id: "cust-2",
-      email: "alice@example.com",
-      name: "Alice Achieng",
-      role: UserRole.CUSTOMER,
-      phone: "+254 733 444555",
-      monthlyBookingsCount: 8
-    }
-  ],
+  id: "cust-2",
+  email: "alice@example.com",
+  name: "Alice Achieng",
+  role: UserRole.CUSTOMER,
+  phone: "+254 733 444555",
+  monthlyBookingsCount: 8,
+  isFoundingMember: true,
+  foundingExpiresAt: "2026-08-31"
+},
   services: [
     // AfyaCare
     {
