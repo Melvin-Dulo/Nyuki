@@ -465,9 +465,9 @@ if (!loginEmail || !loginPassword) {
   </ul>
 
   <div className="border-t border-amber-200 pt-3 text-xs font-semibold text-stone-700">
-    Customer Fee: 1% per booking (minimum KES 5)
+    Customer Fee: 1% per booking
     <br />
-    Business Commission: 3% per completed booking (minimum KES 10)
+    Business Commission: 2% per completed booking
   </div>
 </div>
 
