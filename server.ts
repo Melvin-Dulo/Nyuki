@@ -789,6 +789,24 @@ app.post("/api/queue/:id/action", (req, res) => {
     if (entry.appointmentId) {
       const aptIdx = db.appointments.findIndex(a => a.id === entry.appointmentId);
       if (aptIdx !== -1) db.appointments[aptIdx].status = AppointmentStatus.COMPLETED;
+    const appointment = db.appointments[aptIdx];
+    const business = db.businesses.find(
+  b => b.id === appointment.businessId
+);
+      const commissionRate =
+  business?.isFoundingPartner &&
+  business?.foundingExpiresAt &&
+  new Date(business.foundingExpiresAt) > new Date()
+    ? 0.01
+    : 0.02;
+    const service = db.services.find(
+  s => s.id === appointment.serviceId
+);
+
+const serviceAmount = service?.priceKES || 0;
+      const commissionAmount = Math.round(
+  serviceAmount * commissionRate
+);
     }
 
     // Trigger completion SMS & feedback request
