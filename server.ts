@@ -129,8 +129,9 @@ const DEFAULT_DB: DatabaseSchema = {
   monthlyBookingsCount: 8,
   isFoundingMember: true,
   foundingExpiresAt: "2026-08-31"
-},
-  services: [
+}
+],
+services: [
     // AfyaCare
     {
       id: "afya-gp",
