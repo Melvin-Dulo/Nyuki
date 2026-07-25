@@ -42,6 +42,9 @@ export interface Business {
   logoUrl?: string;
   description: string;
  revenueModel: "TRANSACTION_BASED";
+
+isFoundingPartner: boolean;
+  foundingExpiresAt?: string;
 }
 
 export interface User {
