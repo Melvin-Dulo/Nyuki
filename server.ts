@@ -928,6 +928,34 @@ app.post("/api/reviews", (req, res) => {
   });
 });
 
+app.get("/api/reviews/business/:businessId", (req, res) => {
+  const { businessId } = req.params;
+
+  const db = loadDB();
+
+  const reviews = db.reviews.filter(
+    r => r.businessId === businessId
+  );
+
+  const totalReviews = reviews.length;
+
+  const averageRating =
+    totalReviews > 0
+      ? reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews
+      : 0;
+
+  const qualifiesForRecommendations =
+    totalReviews >= 100 &&
+    averageRating >= 4.0;
+
+  res.json({
+    businessId,
+    totalReviews,
+    averageRating: Number(averageRating.toFixed(2)),
+    qualifiesForRecommendations
+  });
+});
+
 // --- TRANSACTIONS, COMMISSIONS & M-PESA INTEGRATION ---
 app.get("/api/billing/invoices", (req, res) => {
   const { businessId } = req.query;
