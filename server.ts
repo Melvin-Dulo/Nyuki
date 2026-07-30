@@ -30,6 +30,7 @@ interface DatabaseSchema {
   queueEntries: QueueEntry[];
   notificationLogs: NotificationLog[];
   invoices: Invoice[];
+  reviews: Review[];
   careerApplications: CareerApplication[];
   auditLogs: AuditLog[];
 }
@@ -322,6 +323,7 @@ services: [
   paymentMethod: "M-Pesa STK"
 }
   ],
+  reviews: [],
   careerApplications: [
     {
       id: "career-1",
