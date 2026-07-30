@@ -896,6 +896,38 @@ app.get("/api/notifications/logs", (req, res) => {
   res.json(db.notificationLogs.reverse());
 });
 
+// --- REVIEWS & RATINGS ---
+app.post("/api/reviews", (req, res) => {
+  const { businessId, customerId, customerName, rating, comment } = req.body;
+
+  if (!businessId || !customerId || !customerName || !rating) {
+    return res.status(400).json({
+      error: "Missing review information."
+    });
+  }
+
+  const db = loadDB();
+
+  const review: Review = {
+    id: "rev-" + Math.random().toString(36).substring(2, 9),
+    businessId,
+    customerId,
+    customerName,
+    rating: Number(rating),
+    comment: comment || "",
+    createdAt: new Date().toISOString()
+  };
+
+  db.reviews.push(review);
+
+  saveDB(db);
+
+  res.json({
+    success: true,
+    review
+  });
+});
+
 // --- TRANSACTIONS, COMMISSIONS & M-PESA INTEGRATION ---
 app.get("/api/billing/invoices", (req, res) => {
   const { businessId } = req.query;
