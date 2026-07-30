@@ -112,6 +112,16 @@ export interface NotificationLog {
   sentAt: string;
 }
 
+export interface Review {
+  id: string;
+  businessId: string;
+  customerId: string;
+  customerName: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+}
+
 export interface Invoice {
   id: string;
   businessId?: string;
