@@ -807,6 +807,19 @@ const serviceAmount = service?.priceKES || 0;
       const commissionAmount = Math.round(
   serviceAmount * commissionRate
 );
+   if (commissionAmount > 0) {
+  db.invoices.push({
+    id: "inv-" + Math.random().toString(36).substring(2, 9),
+    businessId: appointment.businessId,
+    amountKES: commissionAmount,
+    description: business?.isFoundingPartner
+      ? "Founding Partner Commission (1%)"
+      : "Business Commission (2%)",
+    transactionDate: new Date().toISOString().split("T")[0],
+    status: "Pending",
+    paymentMethod: "M-Pesa STK"
+  });
+}
     }
 
     // Trigger completion SMS & feedback request
