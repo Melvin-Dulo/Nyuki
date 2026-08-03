@@ -108,11 +108,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
       </header>
 
       {/* HERO SECTION */}
-<section id="hero-sec" className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 bg-radial from-amber-100/50 to-transparent">
-  
-  {/* Decorative Honeycomb Grid Overlay Background */}
-  <div id="honeycomb-grid" className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100L0 84L0 50L28 34L56 50L56 84L28 100' fill='none' stroke='%23d97706' stroke-width='2'/%3E%3C/svg%3E")` }}></div>
-
+<section id="hero-sec" className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 bg-radial from-amber-100/50 to-transparent">  
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div className="text-center max-w-3xl mx-auto">
 
