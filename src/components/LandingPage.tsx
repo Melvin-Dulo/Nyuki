@@ -378,9 +378,6 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
 
             <div>
               <h5 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Support & Contact</h5>
-              <p className="text-xs text-stone-400 mb-3">
-                Reach us 24/7 for M-Pesa or Africa's Talking integrations:
-              </p>
               <ul className="text-xs font-semibold text-stone-300 space-y-2">
                 <li>nyukiafrica@gmail.com</li>
                 <li>+254 712 345678</li>
