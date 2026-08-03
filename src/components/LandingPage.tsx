@@ -348,9 +348,6 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 </div>
                 <span className="text-xl font-bold tracking-tight text-white">NYUKI</span>
               </div>
-              <p className="text-stone-400 text-xs leading-relaxed max-w-sm">
-                Nyuki represents Swedish coordination design fused with Swahili agility. Operating decentralized, highly robust customer-routing systems in Africa.
-              </p>
               <div className="mt-6 text-xs text-stone-500 font-semibold uppercase">
                 Bee First. Anywhere.
               </div>
