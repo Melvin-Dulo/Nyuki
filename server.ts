@@ -956,6 +956,60 @@ app.get("/api/reviews/business/:businessId", (req, res) => {
   });
 });
 
+app.post("/api/businesses/:businessId/recommendation-subscribe", (req, res) => {
+  const { businessId } = req.params;
+
+  const db = loadDB();
+
+  const business = db.businesses.find(b => b.id === businessId);
+
+  if (!business) {
+    return res.status(404).json({
+      error: "Business not found."
+    });
+  }
+
+  const reviews = db.reviews.filter(
+    r => r.businessId === businessId
+  );
+
+  const totalReviews = reviews.length;
+
+  const averageRating =
+    totalReviews > 0
+      ? reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews
+      : 0;
+
+  const eligible =
+    totalReviews >= 100 &&
+    averageRating >= 4.0;
+
+  if (!eligible) {
+    return res.status(400).json({
+      error: "Business does not qualify for recommendation program."
+    });
+  }
+
+  business.isRecommended = true;
+  business.recommendationSubscribed = true;
+
+  db.invoices.push({
+    id: "inv-" + Math.random().toString(36).substring(2, 9),
+    businessId,
+    amountKES: 200,
+    description: "Recommendation Program Subscription",
+    transactionDate: new Date().toISOString().split("T")[0],
+    status: "Pending",
+    paymentMethod: "M-Pesa STK"
+  });
+
+  saveDB(db);
+
+  res.json({
+    success: true,
+    message: "Business enrolled in recommendation program."
+  });
+});
 // --- TRANSACTIONS, COMMISSIONS & M-PESA INTEGRATION ---
 app.get("/api/billing/invoices", (req, res) => {
   const { businessId } = req.query;
