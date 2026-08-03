@@ -108,40 +108,44 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
       </header>
 
       {/* HERO SECTION */}
-      <section id="hero-sec" className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 bg-radial from-amber-100/50 to-transparent">
-        
-        {/* Decorative Honeycomb Grid Overlay Background */}
-        <div id="honeycomb-grid" className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100L0 84L0 50L28 34L56 50L56 84L28 100' fill='none' stroke='%23d97706' stroke-width='2'/%3E%3C/svg%3E")` }}></div>
+<section id="hero-sec" className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 bg-radial from-amber-100/50 to-transparent">
+  
+  {/* Decorative Honeycomb Grid Overlay Background */}
+  <div id="honeycomb-grid" className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100L0 84L0 50L28 34L56 50L56 84L28 100' fill='none' stroke='%23d97706' stroke-width='2'/%3E%3C/svg%3E")` }}></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="text-center max-w-3xl mx-auto">
 
-            <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
-              Find and Book<br/>
-              <span className="text-amber-600">Trusted Services.</span>
-            </h1>
-            
-            <p className="text-lg sm:text-xl text-stone-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
-              Discover trusted service providers, book appointments, and pay securely—all in one place with Nyuki.
-            </p>
+      <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
+        Find and Book<br/>
+        <span className="text-amber-600">Trusted Services.</span>
+      </h1>
+      
+      <p className="text-lg sm:text-xl text-stone-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
+        Discover trusted service providers, book appointments, and pay securely—all in one place with Nyuki.
+      </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button 
-                id="btn-hero-cta"
-                onClick={() => onOpenAuth("admin")}
-                className="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-8 py-4 rounded-xl shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2 cursor-pointer border border-amber-600"
-              >
-                <span>Find Services</span>
-                <ArrowRight className="w-5 h-5" />
-              </button>
-              <button 
-                id="btn-hero-customer"
-                onClick={() => onOpenAuth("customer")}
-                className="w-full sm:w-auto bg-[#faf8f5] border-2 border-stone-200 hover:border-stone-400 text-stone-700 font-bold px-8 py-4 rounded-xl transition-all cursor-pointer"
-              >
-                Browse Providers
-              </button>
-            </div>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button 
+          id="btn-hero-cta"
+          onClick={() => onOpenAuth("admin")}
+          className="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-8 py-4 rounded-xl shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2 cursor-pointer border border-amber-600"
+        >
+          <span>Find Services</span>
+          <ArrowRight className="w-5 h-5" />
+        </button>
+        <button 
+          id="btn-hero-customer"
+          onClick={() => onOpenAuth("customer")}
+          className="w-full sm:w-auto bg-[#faf8f5] border-2 border-stone-200 hover:border-stone-400 text-stone-700 font-bold px-8 py-4 rounded-xl transition-all cursor-pointer"
+        >
+          Browse Providers
+        </button>
+      </div>
+
+    </div>  
+  </div>      
+</section>      
 
 
       {/* CORE FEATURES SECTION */}
