@@ -373,54 +373,8 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               </button>
             </div>
 
-            {/* Medium Business */}
-            <div className="bg-white p-8 rounded-2xl border-2 border-amber-500 relative flex flex-col justify-between shadow-xl shadow-amber-500/5">
-              <div className="absolute top-0 right-8 transform -translate-y-1/2 bg-amber-500 text-stone-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-amber-600">
-                RECOMMENDED
-              </div>
-              <div>
-                <span className="inline-block bg-amber-500/15 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-6">
-                  Medium Business
-                </span>
-                <div className="flex items-baseline mb-6">
-                  <span className="text-sm font-semibold text-stone-500 mr-1">KES</span>
-                  <span className="text-4xl font-black text-stone-900 tracking-tight">5,000</span>
-                  <span className="text-stone-400 font-bold text-xs ml-1">/mo</span>
-                </div>
-                <p className="text-stone-600 text-sm mb-8">
-                  Designed for growing healthcare clinics, medium-scale salons, regional legal firms, and universities.
-                </p>
-                <div className="border-t border-stone-100 pt-6">
-                  <span className="block text-xs font-bold text-stone-400 uppercase tracking-widest mb-4">Everything in Standard, plus:</span>
-                  <ul className="space-y-3.5 text-sm font-semibold text-stone-700">
-                    <li className="flex items-center">
-                      <span className="text-amber-600 font-bold mr-2">✓</span>
-                      <span className="text-stone-900 font-bold">Up to 10 staff users</span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-amber-600 font-bold mr-2">✓</span>
-                      <span className="text-stone-900 font-bold">5,000 monthly bookings</span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-amber-600 font-bold mr-2">✓</span>
-                      <span>Advanced analytic curves</span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-amber-600 font-bold mr-2">✓</span>
-                      <span>Priority support ticket lines</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <button 
-                onClick={() => onOpenAuth("admin")}
-                className="mt-8 w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl transition-all shadow-md shadow-amber-500/10 cursor-pointer"
-              >
-                Register Business Free
-              </button>
-            </div>
-
-            {/* Premium Business */}
+           
+            {/* Enterprise */}
             <div className="bg-[#1c1917] p-8 rounded-2xl border border-stone-800 relative flex flex-col justify-between text-[#faf8f5]">
               <div>
                 <span className="inline-block bg-stone-800 text-amber-500 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-6">
