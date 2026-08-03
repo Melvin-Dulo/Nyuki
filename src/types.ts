@@ -35,16 +35,22 @@ export interface Business {
   email: string;
   phone: string;
   operatingHours: {
-    start: string; // "08:00"
-    end: string;   // "17:00"
+    start: string;
+    end: string;
   };
   timezone: string;
   logoUrl?: string;
   description: string;
- revenueModel: "TRANSACTION_BASED";
 
-isFoundingPartner: boolean;
+  revenueModel: "TRANSACTION_BASED";
+
+  isFoundingPartner: boolean;
   foundingExpiresAt?: string;
+
+  isRecommended?: boolean;
+  recommendationSubscribed?: boolean;
+  recommendationFeeKES?: number;
+  recommendationRenewalDate?: string;
 }
 
 export interface User {
