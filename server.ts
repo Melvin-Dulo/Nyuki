@@ -994,14 +994,20 @@ app.post("/api/businesses/:businessId/recommendation-subscribe", (req, res) => {
     });
   }
 
-  business.isRecommended = true;
-  business.recommendationSubscribed = true;
+business.isRecommended = true;
+business.recommendationSubscribed = true;
+
+business.recommendationRenewalDate = new Date(
+  Date.now() + 7 * 24 * 60 * 60 * 1000
+).toISOString();
+
+business.recommendationFeeKES = 100;
 
   db.invoices.push({
     id: "inv-" + Math.random().toString(36).substring(2, 9),
     businessId,
-    amountKES: 200,
-    description: "Recommendation Program Subscription",
+   amountKES: 100,
+    description: "Recommended Business Weekly Subscription",
     transactionDate: new Date().toISOString().split("T")[0],
     status: "Pending",
     paymentMethod: "M-Pesa STK"
