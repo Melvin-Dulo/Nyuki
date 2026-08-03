@@ -405,6 +405,11 @@ const qualifiesForFoundingPartner = foundingBusinessCount < 100;
   description: `A registered provider in ${industry || "service delivery"}.`,
   revenueModel: "TRANSACTION_BASED",
 
+subscriptionPlan:
+  plan === "ENTERPRISE"
+    ? "ENTERPRISE"
+    : "STANDARD",
+    
     isRecommended: false,
 recommendationSubscribed: false,
 recommendationFeeKES: 100,
