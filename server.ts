@@ -405,7 +405,11 @@ const qualifiesForFoundingPartner = foundingBusinessCount < 100;
   description: `A registered provider in ${industry || "service delivery"}.`,
   revenueModel: "TRANSACTION_BASED",
 
-  isFoundingPartner: qualifiesForFoundingPartner,
+    isRecommended: false,
+recommendationSubscribed: false,
+recommendationFeeKES: 100,
+ 
+    isFoundingPartner: qualifiesForFoundingPartner,
 foundingExpiresAt: qualifiesForFoundingPartner
   ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
   : undefined
