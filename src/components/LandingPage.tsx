@@ -352,7 +352,6 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 Bee First. Anywhere.
               </div>
             </div>
-
             <div>
               <h5 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Regional Reach</h5>
               <ul className="space-y-2.5 text-xs text-stone-400">
