@@ -130,13 +130,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
           <span>Find Services</span>
           <ArrowRight className="w-5 h-5" />
         </button>
-        <button 
-          id="btn-hero-customer"
-          onClick={() => onOpenAuth("customer")}
-          className="w-full sm:w-auto bg-[#faf8f5] border-2 border-stone-200 hover:border-stone-400 text-stone-700 font-bold px-8 py-4 rounded-xl transition-all cursor-pointer"
-        >
-          Browse Providers
-        </button>
+
       </div>
 
     </div>  
