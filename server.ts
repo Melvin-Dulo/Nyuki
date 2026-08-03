@@ -389,8 +389,22 @@ app.post("/api/auth/register-business", (req, res) => {
   const businessId = "bz-" + Math.random().toString(36).substring(2, 9);
   const userId = "usr-" + Math.random().toString(36).substring(2, 9);
 
-const foundingBusinessCount = db.businesses.length;
-const qualifiesForFoundingPartner = foundingBusinessCount < 100;
+const foundingStandardCount = db.businesses.filter(
+  b =>
+    b.subscriptionPlan === "STANDARD" &&
+    b.isFoundingPartner
+).length;
+
+const foundingEnterpriseCount = db.businesses.filter(
+  b =>
+    b.subscriptionPlan === "ENTERPRISE" &&
+    b.isFoundingPartner
+).length;
+
+const qualifiesForFoundingPartner =
+  plan === "ENTERPRISE"
+    ? foundingEnterpriseCount < 100
+    : foundingStandardCount < 100;
   
   const newBusiness: Business = {
   id: businessId,
