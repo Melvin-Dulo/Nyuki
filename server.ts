@@ -836,11 +836,14 @@ app.post("/api/queue/:id/action", (req, res) => {
   b => b.id === appointment.businessId
 );
       const commissionRate =
-  business?.isFoundingPartner &&
-  business?.foundingExpiresAt &&
-  new Date(business.foundingExpiresAt) > new Date()
-    ? 0.01
-    : 0.02;
+business?.subscriptionPlan === "ENTERPRISE"
+? 0
+: business?.isFoundingPartner &&
+business?.foundingExpiresAt &&
+new Date(business.foundingExpiresAt) > new Date()
+? 0.015
+: 0.03;
+
     const service = db.services.find(
   s => s.id === appointment.serviceId
 );
@@ -854,9 +857,13 @@ const serviceAmount = service?.priceKES || 0;
     id: "inv-" + Math.random().toString(36).substring(2, 9),
     businessId: appointment.businessId,
     amountKES: commissionAmount,
-    description: business?.isFoundingPartner
-      ? "Founding Partner Commission (1%)"
-      : "Business Commission (2%)",
+    description:
+business?.subscriptionPlan === "ENTERPRISE"
+? "Enterprise Subscription"
+: business?.isFoundingPartner
+? "Founding Partner Commission (1.5%)"
+: "Business Commission (3%)",
+
     transactionDate: new Date().toISOString().split("T")[0],
     status: "Pending",
     paymentMethod: "M-Pesa STK"
