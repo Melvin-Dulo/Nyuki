@@ -382,7 +382,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
                 Reach us 24/7 for M-Pesa or Africa's Talking integrations:
               </p>
               <ul className="text-xs font-semibold text-stone-300 space-y-2">
-                <li>support@nyuki.co.ke</li>
+                <li>nyukiafrica@gmail.com</li>
                 <li>+254 712 345678</li>
               </ul>
             </div>
