@@ -115,11 +115,6 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
-            
-            <div className="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full text-xs font-bold text-amber-800 mb-8 animate-fade-in">
-              <span className="flex h-2 w-2 rounded-full bg-amber-500 animate-pulse"></span>
-              <span>Regional Launch: Supporting Kenya, Uganda & East Africa</span>
-            </div>
 
             <h1 className="text-4xl sm:text-6xl font-black text-stone-900 tracking-tight leading-none mb-6">
               Find and Book<br/>
@@ -127,7 +122,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             </h1>
             
             <p className="text-lg sm:text-xl text-stone-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
-              Discover trusted service providers, compare options, book appointments, and pay securely—all in one place with Nyuki.
+              Discover trusted service providers, book appointments, and pay securely—all in one place with Nyuki.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -148,26 +143,6 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               </button>
             </div>
 
-            {/* Quick value assertions */}
-            <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6 pt-12 border-t border-stone-200 max-w-4xl mx-auto text-left">
-              <div>
-                <span className="block text-3xl font-black text-stone-900">0 minutes</span>
-                <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">Unpredictable Wait Times</span>
-              </div>
-              <div>
-                <span className="block text-3xl font-black text-stone-900">24/7 SMS</span>
-                <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">M-Pesa & Queue Updates</span>
-              </div>
-              <div>
-                <span className="block text-3xl font-black text-stone-900">100% Secure</span>
-                <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">Tenant & Staff Isolation</span>
-              </div>
-    
-            </div>
-
-          </div>
-        </div>
-      </section>
 
       {/* CORE FEATURES SECTION */}
       <section id="features" className="py-24 bg-stone-900 text-[#faf8f5] relative overflow-hidden">
@@ -181,7 +156,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               Find the Right Service for Every Need
             </h3>
             <p className="text-stone-400">
-              Browse trusted providers across multiple categories, compare services, and book appointments in minutes.
+              Browse trusted providers across multiple categories, and book appointments in minutes.
             </p>
           </div>
 
