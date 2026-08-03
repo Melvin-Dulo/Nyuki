@@ -43,6 +43,12 @@ export interface Business {
   description: string;
 
   revenueModel: "TRANSACTION_BASED";
+  subscriptionPlan?: "STANDARD" | "ENTERPRISE";
+
+  subscriptionPlan:
+  plan === "ENTERPRISE"
+    ? "ENTERPRISE"
+    : "STANDARD",
 
   isFoundingPartner: boolean;
   foundingExpiresAt?: string;
