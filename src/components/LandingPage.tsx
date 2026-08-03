@@ -369,10 +369,10 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             <div>
               <h5 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Regional Reach</h5>
               <ul className="space-y-2.5 text-xs text-stone-400">
-                <li>Nairobi, Kenya</li>
-                <li>Mombasa Port</li>
-                <li>Kisumu Terminal</li>
-                <li>Eldoret Hub</li>
+                <li>Nairobi</li>
+                <li>Mombasa</li>
+                <li>Kisumu</li>
+                <li>Eldoret</li>
               </ul>
             </div>
 
