@@ -461,15 +461,32 @@ foundingExpiresAt: qualifiesForFoundingPartner
   db.services.push(defaultService);
 
 // Initial business registration record
+let registrationAmount = 0;
+let registrationDescription = "Business Account Registration";
+let registrationStatus: "Pending" | "Paid" = "Paid";
+
+if (plan === "ENTERPRISE") {
+registrationAmount = qualifiesForFoundingPartner
+? 25000
+: 50000;
+
+registrationDescription = qualifiesForFoundingPartner
+? "Founding Enterprise Subscription"
+: "Enterprise Subscription";
+
+registrationStatus = "Pending";
+}
+
 db.invoices.push({
-  id: "inv-" + Math.random().toString(36).substring(2, 9),
-  businessId,
-  amountKES: 0,
-  description: "Business Account Registration",
-  transactionDate: new Date().toISOString().split("T")[0],
-  status: "Paid",
-  paymentMethod: "M-Pesa STK"
+id: "inv-" + Math.random().toString(36).substring(2, 9),
+businessId,
+amountKES: registrationAmount,
+description: registrationDescription,
+transactionDate: new Date().toISOString().split("T")[0],
+status: registrationStatus,
+paymentMethod: "M-Pesa STK"
 });
+
 
   db.auditLogs.push({
     id: "aud-" + Math.random().toString(36).substring(2, 9),
