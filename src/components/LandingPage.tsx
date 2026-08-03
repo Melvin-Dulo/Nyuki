@@ -360,8 +360,8 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
               <h5 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Platform</h5>
               <ul className="space-y-2.5 text-xs font-semibold text-stone-400">
                 <li><a href="#features" className="hover:text-amber-500 transition-all">Core Features</a></li>
-                <li><a href="#industries" className="hover:text-amber-500 transition-all">Vertical Industries</a></li>
-                <li><a href="#pricing" className="hover:text-amber-500 transition-all">Monthly Pricing</a></li>
+                <li><a href="#industries" className="hover:text-amber-500 transition-all">Industries</a></li>
+                <li><a href="#pricing" className="hover:text-amber-500 transition-all">Pricing</a></li>
                 <li><button onClick={() => onNavigate("careers")} className="hover:text-amber-500 transition-all text-left">Careers Inside Nyuki</button></li>
               </ul>
             </div>
