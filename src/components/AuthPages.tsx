@@ -182,7 +182,7 @@ if (!loginEmail || !loginPassword) {
             <span>Back to Landing</span>
           </button>
 
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => onNavigate("landing")}>
+          <div className="flex items-center space-x-3 " onClick={() => onNavigate("landing")}>
             <img
   src="/nyuki-logo.png"
   alt="Nyuki Logo"
