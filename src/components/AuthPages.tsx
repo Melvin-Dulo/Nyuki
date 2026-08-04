@@ -537,6 +537,7 @@ if (!loginEmail || !loginPassword) {
         className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
       />
     </div>
+  )}
 {customerAuthMode === "signup" && (
     <div>
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
@@ -548,7 +549,7 @@ if (!loginEmail || !loginPassword) {
         className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
       />
     </div>
-
+)}
     <div>
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
         Email Address *
