@@ -485,8 +485,8 @@ if (!loginEmail || !loginPassword) {
   {loading ? "Creating Account..." : "Create Free Business Account"}
 </button>
 
-  </form>
-)}
+ </form>
+) : null}
 
 </>
 ) : (
