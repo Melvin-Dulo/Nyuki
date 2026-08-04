@@ -36,6 +36,7 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [accountType, setAccountType] = useState<"customer" | "business" | null>(null);
+  const [customerAuthMode, setCustomerAuthMode] = useState<"signin" | "signup">("signup");
   
   const handleLogin = async (e: React.FormEvent, customEmail?: string) => {
     if (e) e.preventDefault();
@@ -495,9 +496,36 @@ if (!loginEmail || !loginPassword) {
   </button>
 
   <div className="mb-8 p-6 border rounded-xl bg-white space-y-5">
-    <h3 className="font-black text-lg">
-      👤 Create Free Customer Account
-    </h3>
+    <div className="flex mb-5 bg-stone-100 rounded-xl p-1">
+  <button
+    type="button"
+    onClick={() => setCustomerAuthMode("signin")}
+    className={`flex-1 py-2 rounded-lg text-sm font-bold ${
+      customerAuthMode === "signin"
+        ? "bg-white shadow"
+        : ""
+    }`}
+  >
+    Sign In
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setCustomerAuthMode("signup")}
+    className={`flex-1 py-2 rounded-lg text-sm font-bold ${
+      customerAuthMode === "signup"
+        ? "bg-white shadow"
+        : ""
+    }`}
+  >
+    Create Account
+  </button>
+</div>
+  <h3 className="font-black text-lg">
+  {customerAuthMode === "signin"
+    ? "👤 Customer Sign In"
+    : "👤 Create Free Customer Account"}
+</h3>
 
     <div>
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
