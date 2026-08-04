@@ -335,7 +335,7 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
       <footer id="contact" className="bg-stone-900 text-[#faf8f5] pt-20 pb-12 border-t border-stone-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-12 pb-16 border-b border-stone-800">
+          <div className="grid md:grid-cols-3 gap-16 pb-16 border-b border-stone-800">
             
             <div className="col-span-2">
               <div className="flex items-center space-x-3 mb-6">
