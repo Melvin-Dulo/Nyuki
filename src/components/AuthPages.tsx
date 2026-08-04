@@ -24,7 +24,9 @@ interface AuthPagesProps {
 }
 
 export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePreset }: AuthPagesProps) {
-  const [isRegister, setIsRegister] = useState<boolean>(initialRolePreset === "admin");
+  const [isRegister, setIsRegister] = useState<boolean>(
+  initialRolePreset === "admin"
+);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("password");
   const [showPassword, setShowPassword] = useState(false);
@@ -35,9 +37,14 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
   const [industry, setIndustry] = useState<string>("Clinics/Hospitals");
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
-  const [accountType, setAccountType] = useState<"customer" | "business" | null>(null);
-  const [customerAuthMode, setCustomerAuthMode] = useState<"signin" | "signup">("signup");
+const [accountType, setAccountType] = useState<"customer" | "business" | null>(null);
   
+  const [customerAuthMode, setCustomerAuthMode] = useState<"signin" | "signup">("signup");
+  const [authIntent, setAuthIntent] = useState<"signin" | "signup">(
+  initialRolePreset === "signin"
+    ? "signin"
+    : "signup"
+);
   const handleLogin = async (e: React.FormEvent, customEmail?: string) => {
     if (e) e.preventDefault();
     const loginEmail = customEmail || email;
@@ -260,8 +267,10 @@ if (!loginEmail || !loginPassword) {
   <div className="space-y-4 mb-8">
 
     <h3 className="text-center text-sm font-black uppercase tracking-wider text-stone-500">
-      Choose Account Type
-    </h3>
+  {authIntent === "signin"
+    ? "Choose Sign In Type"
+    : "Choose Account Type"}
+</h3>
 
     <button
       onClick={() => setAccountType("customer")}
