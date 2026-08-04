@@ -339,13 +339,11 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             
             <div className="col-span-2">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="bg-amber-500 text-stone-950 p-2 rounded-lg">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2.5">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                    <path d="M2 17l10 5 10-5" />
-                    <path d="M2 12l10 5 10-5" />
-                  </svg>
-                </div>
+                <img
+  src="/nyuki-logo.png"
+  alt="Nyuki Logo"
+  className="w-12 h-12 object-contain"
+/>
                 <span className="text-xl font-bold tracking-tight text-white">NYUKI</span>
               </div>
               <div className="mt-6 text-xs text-stone-500 font-semibold uppercase">
