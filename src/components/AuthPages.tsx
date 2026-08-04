@@ -276,20 +276,34 @@ if (!loginEmail || !loginPassword) {
       onClick={() => setAccountType("customer")}
       className="w-full p-5 border rounded-xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
     >
-      <div className="font-black text-lg">👤 Customer</div>
-      <div className="text-sm text-stone-500">
-        Book appointments, join queues, and receive updates for free.
-      </div>
+     <div className="font-black text-lg">
+  {authIntent === "signin"
+    ? "👤 Customer Sign In"
+    : "👤 Customer"}
+</div>
+
+<div className="text-sm text-stone-500">
+  {authIntent === "signin"
+    ? "Access your bookings, queues and appointment history."
+    : "Book appointments, join queues, and receive updates for free."}
+</div>
     </button>
 
     <button
       onClick={() => setAccountType("business")}
       className="w-full p-5 border rounded-xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
     >
-      <div className="font-black text-lg">🏢 Business</div>
-      <div className="text-sm text-stone-500">
-        Manage appointments, staff, and customer queues.
-      </div>
+      <div className="font-black text-lg">
+  {authIntent === "signin"
+    ? "🏢 Business Sign In"
+    : "🏢 Business"}
+</div>
+
+<div className="text-sm text-stone-500">
+  {authIntent === "signin"
+    ? "Access your dashboard, bookings and operations."
+    : "Manage appointments, staff, and customer queues."}
+</div>
     </button>
 
   </div>
