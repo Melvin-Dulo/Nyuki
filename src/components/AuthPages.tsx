@@ -44,8 +44,6 @@ export default function AuthPages({
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
 const [accountType, setAccountType] = useState<"customer" | "business" | null>(null);
-  
-  const [customerAuthMode, setCustomerAuthMode] = useState<"signin" | "signup">("signup");
 
 const [authIntentMode, setAuthIntentMode] = useState<"signin" | "signup">(authIntent);
   const handleLogin = async (e: React.FormEvent, customEmail?: string) => {
@@ -500,37 +498,13 @@ if (!loginEmail || !loginPassword) {
   </button>
 
   <div className="mb-8 p-6 border rounded-xl bg-white space-y-5">
-    <div className="flex mb-5 bg-stone-100 rounded-xl p-1">
-  <button
-    type="button"
-    onClick={() => setCustomerAuthMode("signin")}
-    className={`flex-1 py-2 rounded-lg text-sm font-bold ${
-      customerAuthMode === "signin"
-        ? "bg-white shadow"
-        : ""
-    }`}
-  >
-    Sign In
-  </button>
-
-  <button
-    type="button"
-    onClick={() => setCustomerAuthMode("signup")}
-    className={`flex-1 py-2 rounded-lg text-sm font-bold ${
-      customerAuthMode === "signup"
-        ? "bg-white shadow"
-        : ""
-    }`}
-  >
-    Create Account
-  </button>
-</div>
+    
   <h3 className="font-black text-lg">
-  {customerAuthMode === "signin"
-    ? "👤 Customer Sign In"
-    : "👤 Create Free Customer Account"}
+ {authIntentMode === "signin"
+  ? "👤 Customer Sign In"
+  : "👤 Create Free Customer Account"}
 </h3>
-{customerAuthMode === "signup" && (
+{authIntentMode === "signup" && (
     <div>
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
         Full Name *
@@ -542,7 +516,7 @@ if (!loginEmail || !loginPassword) {
       />
     </div>
   )}
-{customerAuthMode === "signup" && (
+{authIntentMode === "signup" && (
     <div>
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
         Phone Number *
@@ -602,7 +576,7 @@ if (!loginEmail || !loginPassword) {
       type="button"
       className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3 rounded-xl"
     >
-      {customerAuthMode === "signin"
+      {authIntentMode === "signin"
   ? "Sign In"
   : "Create Free Account"}
     </button>
