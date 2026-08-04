@@ -20,10 +20,16 @@ import { UserRole } from "../types";
 interface AuthPagesProps {
   onNavigate: (view: string) => void;
   onLoginSuccess: (user: any, business: any) => void;
-  initialRolePreset?: string; // "admin" | "customer" | "staff"
+  initialRolePreset?: string;
+  authIntent?: "signin" | "signup";
 }
 
-export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePreset }: AuthPagesProps) {
+export default function AuthPages({
+  onNavigate,
+  onLoginSuccess,
+  initialRolePreset,
+  authIntent = "signup"
+}: AuthPagesProps) {
   const [isRegister, setIsRegister] = useState<boolean>(
   initialRolePreset === "admin"
 );
@@ -40,11 +46,8 @@ export default function AuthPages({ onNavigate, onLoginSuccess, initialRolePrese
 const [accountType, setAccountType] = useState<"customer" | "business" | null>(null);
   
   const [customerAuthMode, setCustomerAuthMode] = useState<"signin" | "signup">("signup");
-  const [authIntent, setAuthIntent] = useState<"signin" | "signup">(
-  initialRolePreset === "signin"
-    ? "signin"
-    : "signup"
-);
+
+const [authIntentMode, setAuthIntentMode] = useState<"signin" | "signup">(authIntent);
   const handleLogin = async (e: React.FormEvent, customEmail?: string) => {
     if (e) e.preventDefault();
     const loginEmail = customEmail || email;
@@ -267,7 +270,7 @@ if (!loginEmail || !loginPassword) {
   <div className="space-y-4 mb-8">
 
     <h3 className="text-center text-sm font-black uppercase tracking-wider text-stone-500">
-  {authIntent === "signin"
+  {authIntentMode === "signin"
     ? "Choose Sign In Type"
     : "Choose Account Type"}
 </h3>
@@ -277,13 +280,13 @@ if (!loginEmail || !loginPassword) {
       className="w-full p-5 border rounded-xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
     >
      <div className="font-black text-lg">
-  {authIntent === "signin"
+  {authIntentMode === "signin"
     ? "👤 Customer Sign In"
     : "👤 Customer"}
 </div>
 
 <div className="text-sm text-stone-500">
-  {authIntent === "signin"
+  {authIntentMode === "signin"
     ? "Access your bookings, queues and appointment history."
     : "Book appointments, join queues, and receive updates for free."}
 </div>
@@ -294,13 +297,13 @@ if (!loginEmail || !loginPassword) {
       className="w-full p-5 border rounded-xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
     >
       <div className="font-black text-lg">
-  {authIntent === "signin"
+  {authIntentMode === "signin"
     ? "🏢 Business Sign In"
     : "🏢 Business"}
 </div>
 
 <div className="text-sm text-stone-500">
-  {authIntent === "signin"
+  {authIntentMode === "signin"
     ? "Access your dashboard, bookings and operations."
     : "Manage appointments, staff, and customer queues."}
 </div>
