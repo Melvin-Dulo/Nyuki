@@ -3,7 +3,7 @@ import {
   Activity, 
   MapPin, 
   Calendar, 
-  Users, 
+  Users,
   Clock, 
   Bell, 
   ArrowRight, 
@@ -18,7 +18,10 @@ import {
 
 interface LandingPageProps {
   onNavigate: (view: string) => void;
-  onOpenAuth: (role?: string) => void;
+  onOpenAuth: (
+  role?: string,
+  intent?: "signin" | "signup"
+) => void;
 }
 
 export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps) {
@@ -88,20 +91,18 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
           </nav>
 
           <div className="flex items-center space-x-4">
-            <button 
-              id="btn-nav-login"
-              onClick={() => onOpenAuth()} 
-              className="text-stone-700 font-bold text-sm px-4 py-2 hover:text-amber-600 transition-colors cursor-pointer"
-            >
-              Sign In
-            </button>
-            <button 
-              id="btn-nav-getstarted"
-              onClick={() => onOpenAuth("admin")} 
-              className="bg-stone-950 text-[#faf8f5] hover:bg-stone-800 border-2 border-stone-950 font-semibold text-sm px-5 py-2.5 rounded-xl transition-all shadow-md cursor-pointer"
-            >
-              Get Started Free
-            </button>
+            <button
+  id="btn-nav-login"
+  onClick={() => onOpenAuth(undefined, "signin")}
+>
+  Sign In
+</button>
+            <button
+  id="btn-nav-getstarted"
+  onClick={() => onOpenAuth("admin", "signup")}
+>
+  Get Started Free
+</button>
           </div>
 
         </div>
