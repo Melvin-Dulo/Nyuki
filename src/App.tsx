@@ -14,7 +14,7 @@ export default function App() {
   
   // Custom auth preset state when jumping from Landing to login
   const [authRolePreset, setAuthRolePreset] = useState<string | undefined>(undefined);
-
+const [authIntent, setAuthIntent] = useState<"signin" | "signup">("signup");
   // Authentication State Variables
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [currentBusiness, setCurrentBusiness] = useState<Business | null>(null);
@@ -59,10 +59,14 @@ export default function App() {
     setCurrentView(view);
   };
 
-  const handleOpenAuth = (rolePreset?: string) => {
-    setAuthRolePreset(rolePreset);
-    setCurrentView("auth");
-  };
+ const handleOpenAuth = (
+  rolePreset?: string,
+  intent: "signin" | "signup" = "signup"
+) => {
+  setAuthRolePreset(rolePreset);
+  setAuthIntent(intent);
+  setCurrentView("auth");
+};
 
   const handleUpdateBusinessProfile = (updatedBz: Business) => {
     setCurrentBusiness(updatedBz);
@@ -88,10 +92,11 @@ export default function App() {
 
       {currentView === "auth" && (
         <AuthPages 
-          onNavigate={handleNavigate} 
-          onLoginSuccess={handleLoginSuccess}
-          initialRolePreset={authRolePreset}
-        />
+  onNavigate={handleNavigate} 
+  onLoginSuccess={handleLoginSuccess}
+  initialRolePreset={authRolePreset}
+  authIntent={authIntent}
+/>
       )}
 
       {currentView === "dashboard" && currentUser && (
