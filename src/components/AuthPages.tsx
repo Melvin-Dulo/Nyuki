@@ -320,30 +320,8 @@ if (!loginEmail || !loginPassword) {
     
   ← Back
 </button>
-  <div className="flex border-b border-stone-200 mb-8">
-    <button
-      onClick={() => { setIsRegister(false); setErrorMsg(""); }}
-      className={`flex-1 text-center font-bold text-sm uppercase pb-4 cursor-pointer transition-all ${
-        !isRegister
-          ? "border-b-2 border-amber-500 text-stone-950"
-          : "text-stone-400 hover:text-stone-700"
-      }`}
-    >
-      Business Sign In
-    </button>
 
-    <button
-      onClick={() => { setIsRegister(true); setErrorMsg(""); }}
-      className={`flex-1 text-center font-bold text-sm uppercase pb-4 cursor-pointer transition-all ${
-        isRegister
-          ? "border-b-2 border-amber-500 text-stone-950"
-          : "text-stone-400 hover:text-stone-700"
-      }`}
-    >
-      Onboard My Business
-    </button>
-    </div>
-{!isRegister ? (
+{authIntentMode === "signin" ? (
   <form onSubmit={handleLogin} className="space-y-5">
     <div>
   <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
