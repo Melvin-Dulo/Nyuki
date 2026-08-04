@@ -526,7 +526,7 @@ if (!loginEmail || !loginPassword) {
     ? "👤 Customer Sign In"
     : "👤 Create Free Customer Account"}
 </h3>
-
+{customerAuthMode === "signup" && (
     <div>
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
         Full Name *
@@ -537,7 +537,7 @@ if (!loginEmail || !loginPassword) {
         className="w-full bg-[#faf8f5] border border-stone-200 rounded-xl px-4 py-3 text-sm"
       />
     </div>
-
+{customerAuthMode === "signup" && (
     <div>
       <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
         Phone Number *
@@ -597,7 +597,9 @@ if (!loginEmail || !loginPassword) {
       type="button"
       className="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3 rounded-xl"
     >
-      Create Free Account
+      {customerAuthMode === "signin"
+  ? "Sign In"
+  : "Create Free Account"}
     </button>
 </div>
 </>
