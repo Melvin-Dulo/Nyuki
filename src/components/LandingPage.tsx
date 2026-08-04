@@ -91,20 +91,22 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
           </nav>
 
           <div className="flex items-center space-x-4">
-            <button
-  id="btn-nav-login"
-  onClick={() => onOpenAuth(undefined, "signin")}
->
-  Sign In
-</button>
-            <button
-  id="btn-nav-getstarted"
-  onClick={() => onOpenAuth("admin", "signup")}
->
-  Get Started Free
-</button>
-          </div>
+  <button
+    id="btn-nav-login"
+    onClick={() => onOpenAuth(undefined, "signin")}
+    className="px-5 py-2.5 rounded-xl border border-stone-300 bg-white hover:border-amber-500 hover:text-amber-600 hover:shadow-md transition-all font-bold text-sm cursor-pointer"
+  >
+    Sign In
+  </button>
 
+  <button
+    id="btn-nav-getstarted"
+    onClick={() => onOpenAuth("admin", "signup")}
+    className="bg-amber-500 hover:bg-amber-600 text-stone-950 font-black text-sm px-6 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all cursor-pointer"
+  >
+    Get Started Free
+  </button>
+</div>
         </div>
       </header>
 
