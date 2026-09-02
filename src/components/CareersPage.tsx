@@ -125,9 +125,11 @@ export default function CareersPage({ onNavigate }: CareersPageProps) {
           </button>
           
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => onNavigate("landing")}>
-            <div className="w-10 h-10 bg-amber-500 flex items-center justify-center clip-hex shadow-md shadow-amber-500/10">
-              <span className="font-extrabold text-white text-lg">N</span>
-            </div>
+            <img
+  src="/nyuki-logo.png"
+  alt="Nyuki Logo"
+  className="w-10 h-10 object-contain"
+/>
             <span className="font-bold text-stone-900 tracking-tight text-base italic">Nyuki Careers</span>
           </div>
         </div>
