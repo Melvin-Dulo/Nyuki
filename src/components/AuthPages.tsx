@@ -67,20 +67,25 @@ if (!loginEmail || !loginPassword) {
 });
 
       if (error) {
-        setErrorMsg(error.message);
-        return;
-      }
+  console.log("LOGIN ERROR:", error);
+  setErrorMsg(error.message);
+  return;
+}
 
-      if (data?.user) {
-        // Fetch matching provider details if they exist
-        const { data: providerData } = await supabase
-          .from('providers')
-          .select('*')
-          .eq('id', data.user.id)
-          .single();
+     if (data?.user) {
+  console.log("LOGIN SUCCESS");
+  console.log("USER:", data.user);
 
-        onLoginSuccess(data.user, providerData || null);
-      }
+  const { data: providerData } = await supabase
+    .from('providers')
+    .select('*')
+    .eq('id', data.user.id)
+    .single();
+
+  console.log("PROVIDER:", providerData);
+
+  onLoginSuccess(data.user, providerData || null);
+}
     } catch (err) {
       console.error(err);
       setErrorMsg("An unexpected authentication timeout occurred.");
@@ -106,10 +111,11 @@ if (!loginEmail || !loginPassword) {
         password: loginPassword, // Uses default development "password" block or state
       });
 
-      if (error) {
-        setErrorMsg(error.message);
-        return;
-      }
+     if (error) {
+  console.log("LOGIN ERROR:", error);
+  setErrorMsg(error.message);
+  return;
+}
 
       const userId = data.user?.id;
 
