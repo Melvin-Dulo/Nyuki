@@ -232,9 +232,10 @@ if (!loginEmail || !loginPassword) {
         id={`btn-demo-prof-${i}`}
         key={prof.email}
         onClick={(e) => {
-          console.log("Demo clicked:", prof.email);
-          handleLogin(e, prof.email);
-        }}
+  alert(`Demo clicked: ${prof.email}`);
+  console.log("Demo clicked:", prof.email);
+  handleLogin(e, prof.email);
+}}
         disabled={loading}
         className={`border p-4 rounded-xl text-left transition-all ${prof.color} whitespace-normal leading-normal select-none cursor-pointer disabled:opacity-50`}
       >
