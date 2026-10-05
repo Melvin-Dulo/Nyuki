@@ -99,8 +99,14 @@ const [authIntent, setAuthIntent] = useState<"signin" | "signup">("signup");
 />
       )}
 
-      {currentView === "dashboard" && currentUser && (
-        <div id="active-dashboard-container" className="animate-fade-in">
+  {currentView === "dashboard" && currentUser && (
+  <div id="active-dashboard-container" className="animate-fade-in">
+
+    {currentUser.demoMode && (
+      <div className="bg-amber-100 border-b border-amber-300 text-amber-900 px-4 py-3 text-center font-bold text-sm">
+        DEMO MODE — Changes are not permanently saved.
+      </div>
+    )}
           
           {/* BUSINESS OVERSEER PORTAL */}
           {currentUser.role === UserRole.BUSINESS_ADMIN && currentBusiness && (
