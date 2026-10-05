@@ -20,6 +20,7 @@ interface StaffDashboardProps {
 }
 
 export default function StaffDashboard({ businessId, staffUser, onLogout }: StaffDashboardProps) {
+  const isDemoMode = staffUser?.demoMode === true;
   const [queue, setQueue] = useState<QueueEntry[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [services, setServices] = useState<Service[]>([]);
@@ -156,6 +157,11 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
           <div>
             <h1 className="font-extrabold text-sm uppercase leading-none text-white tracking-widest">NYUKI STAFF DESK</h1>
             <span className="text-[10px] text-stone-400 mt-0.5 block">{staffUser.name} • Active Coordinator</span>
+            {isDemoMode && (
+  <span className="text-[10px] text-amber-400 font-bold block mt-1">
+    DEMO MODE • Changes are not permanently saved
+  </span>
+)}
           </div>
         </div>
 
