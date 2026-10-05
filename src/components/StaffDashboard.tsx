@@ -4,12 +4,9 @@ import {
   CheckCircle2, 
   PhoneCall, 
   Play, 
-  FileCheck, 
   Trash2, 
   UserPlus, 
-  Clock, 
-  HelpCircle,
-  Tv
+  Clock
 } from "lucide-react";
 import { QueueEntry, Appointment, QueueStatus, AppointmentStatus, Service } from "../types";
 
@@ -56,19 +53,48 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
         }
       }
     } catch (err) {
-      console.error("Error loaded staff dashboard data:", err);
+      console.error("Error loading staff dashboard data:", err);
     } finally {
       setLoading(false);
     }
   };
 
+  // Maps action strings to QueueStatus enums
+  const getNextQueueStatus = (action: string): QueueStatus | null => {
+    switch (action.toLowerCase()) {
+      case "call":
+        return QueueStatus.CALLED;
+      case "start":
+        return QueueStatus.IN_SERVICE;
+      case "complete":
+        return QueueStatus.COMPLETED;
+      default:
+        return null;
+    }
+  };
+
   const handleQueueAction = async (id: string, action: string) => {
+    // IN-MEMORY DEMO MODE INTERCEPTION
     if (isDemoMode) {
-  setRecentActionMsg(
-    `DEMO MODE: '${action.toUpperCase()}' executed successfully.`
-  );
-  return;
-}
+      if (action.toLowerCase() === "skip") {
+        setQueue((prev) => prev.filter((item) => item.id !== id));
+        setRecentActionMsg("DEMO MODE: Ticket removed from active queue.");
+        return;
+      }
+
+      const nextStatus = getNextQueueStatus(action);
+      if (nextStatus) {
+        setQueue((prev) =>
+          prev.map((item) => (item.id === id ? { ...item, status: nextStatus } : item))
+        );
+        setRecentActionMsg(
+          `DEMO MODE: Simulated '${action.toUpperCase()}' action in UI state.`
+        );
+      }
+      return;
+    }
+
+    // REAL BACKEND API MUTATION
     try {
       const res = await fetch(`/api/queue/${id}/action`, {
         method: "POST",
@@ -79,7 +105,7 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
       if (res.ok) {
         const updatedItem = await res.json();
         setRecentActionMsg(`Successfully triggered '${action.toUpperCase()}' action on Ticket ${updatedItem.queueNumber}`);
-        // Refresh active layouts
+        
         const qRes = await fetch(`/api/queue?businessId=${businessId}`);
         if (qRes.ok) setQueue(await qRes.json());
         const aRes = await fetch(`/api/appointments?businessId=${businessId}`);
@@ -92,21 +118,39 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
 
   const handleCreateWalkin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isDemoMode) {
-  setRecentActionMsg(
-    `DEMO MODE: Walk-in customer '${walkinName}' added successfully.`
-  );
 
-  setWalkinName("");
-  setWalkinPhone("");
-
-  return;
-}
     if (!walkinName || !walkinPhone) {
-      alert("Please enter the walk-in customer's name and Safaricom telephone.");
+      alert("Please enter the walk-in customer's name and telephone.");
       return;
     }
 
+    // IN-MEMORY DEMO MODE INTERCEPTION
+    if (isDemoMode) {
+      const generatedTicketNum = `T-${Math.floor(100 + Math.random() * 900)}`;
+      const newDemoEntry: QueueEntry = {
+        id: `demo-${Date.now()}`,
+        businessId,
+        customerName: walkinName,
+        customerPhone: walkinPhone,
+        serviceId: selectedServiceId,
+        queueNumber: generatedTicketNum,
+        status: QueueStatus.WAITING,
+        position: queue.length + 1,
+        waitTimeEstimateMinutes: 15,
+        createdAt: new Date().toISOString(),
+      } as QueueEntry;
+
+      setQueue((prev) => [...prev, newDemoEntry]);
+      setRecentActionMsg(
+        `DEMO MODE: Generated walk-in Ticket ${generatedTicketNum} for ${walkinName}.`
+      );
+
+      setWalkinName("");
+      setWalkinPhone("");
+      return;
+    }
+
+    // REAL BACKEND API MUTATION
     try {
       const res = await fetch("/api/queue/walkin", {
         method: "POST",
@@ -124,7 +168,7 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
         setRecentActionMsg(`Successfully generated walk-in Queue Ticket ${newQE.queueNumber}! Queue updated.`);
         setWalkinName("");
         setWalkinPhone("");
-        // Reload queues list
+        
         const qRes = await fetch(`/api/queue?businessId=${businessId}`);
         if (qRes.ok) setQueue(await qRes.json());
       } else {
@@ -137,8 +181,40 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
     }
   };
 
-  // Automatically check in appointments dynamically if walk-ins arrive or button is pushed
   const handleCheckInAppointment = async (aptId: string) => {
+    // IN-MEMORY DEMO MODE INTERCEPTION
+    if (isDemoMode) {
+      setAppointments((prev) =>
+        prev.map((apt) =>
+          apt.id === aptId ? { ...apt, status: AppointmentStatus.CHECKED_IN } : apt
+        )
+      );
+
+      const targetApt = appointments.find((a) => a.id === aptId);
+      const generatedTicketNum = `A-${Math.floor(100 + Math.random() * 900)}`;
+      
+      if (targetApt) {
+        const newDemoEntry: QueueEntry = {
+          id: `demo-apt-${Date.now()}`,
+          businessId,
+          customerName: targetApt.customerName,
+          customerPhone: "+254 700 000000",
+          serviceId: targetApt.serviceId,
+          queueNumber: generatedTicketNum,
+          status: QueueStatus.WAITING,
+          position: queue.length + 1,
+          waitTimeEstimateMinutes: 10,
+          createdAt: new Date().toISOString(),
+        } as QueueEntry;
+
+        setQueue((prev) => [...prev, newDemoEntry]);
+      }
+
+      setRecentActionMsg("DEMO MODE: Appointment checked in and added to queue.");
+      return;
+    }
+
+    // REAL BACKEND API MUTATION
     try {
       const res = await fetch(`/api/appointments/${aptId}`, {
         method: "PUT",
@@ -159,30 +235,29 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
   };
 
   const activeQueue = queue.filter(q => q.status !== QueueStatus.COMPLETED);
-  const completedQueue = queue.filter(q => q.status === QueueStatus.COMPLETED);
 
   return (
     <div id="staff-dashboard-root" className="min-h-screen bg-[#FDFBF7] text-stone-900 font-sans">
       
       {/* MINIMAL STAFF SUBHEADER */}
-      <header className="bg-stone-900 text-[#faf8f5] px-6 py-4.5 border-b border-stone-850 flex items-center justify-between shadow-md">
+      <header className="bg-stone-900 text-[#faf8f5] px-6 py-4.5 border-b border-stone-800 flex items-center justify-between shadow-md">
         <div className="flex items-center space-x-3">
           <div className="w-9 h-9 bg-amber-500 flex items-center justify-center clip-hex shadow shadow-amber-500/20">
             <span className="font-black text-white text-sm">N</span>
           </div>
           <div>
             <h1 className="font-extrabold text-sm uppercase leading-none text-white tracking-widest">NYUKI STAFF DESK</h1>
-            <span className="text-[10px] text-stone-400 mt-0.5 block">{staffUser.name} • Active Coordinator</span>
+            <span className="text-[10px] text-stone-400 mt-0.5 block">{staffUser?.name || "Staff Operator"} • Active Coordinator</span>
             {isDemoMode && (
-  <span className="text-[10px] text-amber-400 font-bold block mt-1">
-    DEMO MODE • Changes are not permanently saved
-  </span>
-)}
+              <span className="text-[10px] text-amber-400 font-bold block mt-1">
+                DEMO MODE • Interactive simulation active
+              </span>
+            )}
           </div>
         </div>
 
         <div className="flex items-center space-x-4">
-          <span className="hidden sm:inline-block bg-stone-800 text-amber-500 font-bold text-[10px] uppercase px-3 py-1 rounded-full border border-stone-705">
+          <span className="hidden sm:inline-block bg-stone-800 text-amber-500 font-bold text-[10px] uppercase px-3 py-1 rounded-full border border-stone-700">
             M-Pesa Connected
           </span>
           <button
@@ -205,7 +280,7 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
           </div>
         )}
 
-        {/* ACTIVE QUEUE BOARD CELL (Primary Operational Sector) */}
+        {/* ACTIVE QUEUE BOARD CELL */}
         <div className="lg:col-span-8 space-y-8">
           
           <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-8">
@@ -230,14 +305,12 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
               </div>
             ) : activeQueue.length === 0 ? (
               <div className="py-16 text-center bg-stone-50 border border-dashed border-stone-200 rounded-xl max-w-lg mx-auto p-8">
-                <p className="text-stone-550 font-black text-sm uppercase tracking-tight text-stone-600 mb-1">Waiting list is clean!</p>
+                <p className="font-black text-sm uppercase tracking-tight text-stone-600 mb-1">Waiting list is clean!</p>
                 <p className="text-xs text-stone-400">Add walk-ins using the panel on the right or check in Scheduled Appointments beneath.</p>
               </div>
             ) : (
               <div id="active-queue-list" className="space-y-4">
-                {activeQueue.sort((a,b) => a.position - b.position).map((entry, index) => {
-                  
-                  // Color codes for statuses
+                {activeQueue.sort((a,b) => a.position - b.position).map((entry) => {
                   let bgCard = "bg-white";
                   let borderCard = "border-stone-200";
                   if (entry.status === QueueStatus.CALLED) {
@@ -254,13 +327,12 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
                       className={`p-5 rounded-xl border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all ${bgCard} ${borderCard}`}
                     >
                       <div className="flex items-center space-x-4">
-                        {/* Huge Ticket Code Badge */}
                         <div className={`w-14 h-14 rounded-xl flex flex-col items-center justify-center font-black leading-none uppercase border shadow-inner ${
                           entry.status === QueueStatus.IN_SERVICE
                             ? "bg-amber-500 border-amber-500 text-stone-950"
                             : "bg-stone-50 border-stone-200 text-stone-900"
                         }`}>
-                          <span className="text-[10px] text-stone-550 block select-none">TKT</span>
+                          <span className="text-[10px] text-stone-500 block select-none">TKT</span>
                           <span className="text-lg tracking-tighter mt-0.5">{entry.queueNumber}</span>
                         </div>
 
@@ -290,7 +362,6 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
 
                       {/* QUICK QUEUE ACTIONS ROW */}
                       <div className="flex items-center gap-2 self-start sm:self-auto">
-                        
                         {entry.status === QueueStatus.WAITING && (
                           <button
                             onClick={() => handleQueueAction(entry.id, "call")}
@@ -323,12 +394,11 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
 
                         <button
                           onClick={() => handleQueueAction(entry.id, "skip")}
-                          className="bg-[#faf8f5] hover:bg-red-50 text-red-700 border border-red-155 font-bold text-xs px-2 py-2 rounded-lg cursor-pointer transition-all"
+                          className="bg-[#faf8f5] hover:bg-red-50 text-red-700 border border-red-200 font-bold text-xs px-2 py-2 rounded-lg cursor-pointer transition-all"
                           title="Skip/Dismiss Customer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
-
                       </div>
 
                     </div>
@@ -338,9 +408,9 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
             )}
           </div>
 
-          {/* SCHEDULED APPOINTMENTS BULLET REGISTRY DOCKET */}
+          {/* SCHEDULED APPOINTMENTS DOCKET */}
           <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-8">
-            <h3 className="text-stone-905 font-extrabold text-sm uppercase tracking-tight mb-4 text-stone-900">
+            <h3 className="font-extrabold text-sm uppercase tracking-tight mb-4 text-stone-900">
               Today's Appointment Log
             </h3>
             
@@ -392,18 +462,17 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
 
         </div>
 
-        {/* WALK-IN ONDEMAND SIDE PANEL DOCKET */}
-        <div className="lg:col-span-4 bg-white border border-stone-200 rounded-2.5xl p-6 sm:p-8">
+        {/* WALK-IN SIDE PANEL DOCKET */}
+        <div className="lg:col-span-4 bg-white border border-stone-200 rounded-2xl p-6 sm:p-8">
           <div className="mb-6">
             <h3 className="text-stone-900 font-extrabold text-sm uppercase tracking-tight flex items-center">
               <UserPlus className="w-4 h-4 mr-2 text-amber-500" />
               <span>Spontaneous Walk-ins</span>
             </h3>
-            <p className="text-stone-505 text-[11px] text-stone-500 mt-1">Add clients directly arriving in-lobby to bypass reservations.</p>
+            <p className="text-[11px] text-stone-500 mt-1">Add clients directly arriving in-lobby to bypass reservations.</p>
           </div>
 
           <form onSubmit={handleCreateWalkin} className="space-y-4">
-            
             <div>
               <label className="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1.5">Direct Client Name *</label>
               <input 
@@ -445,7 +514,7 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
               )}
             </div>
 
-            <div className="bg-stone-50 p-3 rounded-lg border border-stone-150 text-[10px] text-stone-500 leading-normal">
+            <div className="bg-stone-50 p-3 rounded-lg border border-stone-200 text-[10px] text-stone-500 leading-normal">
               🔔 Submitting automatically triggers check-in, assigns a sequential Ticket badge, and sends a Lipa/SMS greeting.
             </div>
 
@@ -455,7 +524,6 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
             >
               <span>Verify and Add to Queue</span>
             </button>
-
           </form>
         </div>
 
