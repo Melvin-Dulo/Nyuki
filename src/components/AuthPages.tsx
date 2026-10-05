@@ -212,20 +212,19 @@ const quickDemoProfiles = [
       } as Business
     );
   }
-
-  if (role === "staff-afyacare") {
-    onLoginSuccess(
-      {
-        id: "demo-staff",
-        name: "Dr. David Kiprop",
-        email: "dr.kiprop@afyacare.co.ke",
-        role: UserRole.STAFF,
-        businessId: "afyacare-demo",
-      },
-      null
-    );
-  }
-
+if (role === "staff-afyacare") {
+  onLoginSuccess(
+    {
+      id: "demo-staff",
+      name: "Dr. David Kiprop",
+      email: "dr.kiprop@afyacare.co.ke",
+      role: UserRole.STAFF,
+      businessId: "afyacare-demo",
+      demoMode: true,
+    },
+    null
+  );
+}
   if (role === "customer") {
     onLoginSuccess(
       {
