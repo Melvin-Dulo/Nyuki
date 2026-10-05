@@ -186,6 +186,7 @@ const quickDemoProfiles = [
         name: "AfyaCare Admin",
         email: "admin@afyacare.co.ke",
         role: UserRole.BUSINESS_ADMIN,
+        demoMode: true,
       },
       {
         id: "afyacare-demo",
@@ -202,6 +203,7 @@ const quickDemoProfiles = [
         name: "Kendi Wanjiru",
         email: "kendi@tajistudio.com",
         role: UserRole.BUSINESS_ADMIN,
+        demoMode: true,
       },
       {
         id: "taji-demo",
@@ -231,6 +233,7 @@ const quickDemoProfiles = [
         name: "Peter Mwangi",
         email: "peter@example.com",
         role: UserRole.CUSTOMER,
+        demoMode: true,
       },
       null
     );
