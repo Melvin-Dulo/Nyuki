@@ -63,6 +63,12 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
   };
 
   const handleQueueAction = async (id: string, action: string) => {
+    if (isDemoMode) {
+  setRecentActionMsg(
+    `DEMO MODE: '${action.toUpperCase()}' executed successfully.`
+  );
+  return;
+}
     try {
       const res = await fetch(`/api/queue/${id}/action`, {
         method: "POST",
@@ -86,6 +92,16 @@ export default function StaffDashboard({ businessId, staffUser, onLogout }: Staf
 
   const handleCreateWalkin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isDemoMode) {
+  setRecentActionMsg(
+    `DEMO MODE: Walk-in customer '${walkinName}' added successfully.`
+  );
+
+  setWalkinName("");
+  setWalkinPhone("");
+
+  return;
+}
     if (!walkinName || !walkinPhone) {
       alert("Please enter the walk-in customer's name and Safaricom telephone.");
       return;
