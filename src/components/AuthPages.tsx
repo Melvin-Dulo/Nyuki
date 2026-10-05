@@ -15,7 +15,7 @@ import {
   Eye,
   EyeOff
 } from "lucide-react";
-import { UserRole } from "../types";
+import { UserRole, Business } from "../types";
 
 interface AuthPagesProps {
   onNavigate: (view: string) => void;
@@ -147,33 +147,95 @@ if (!loginEmail || !loginPassword) {
       setLoading(false);
     }
   };
-  const quickDemoProfiles = [
-    {
-      roleLabel: "BUSINESS ADMIN (AfyaCare Clinic)",
-      email: "admin@afyacare.co.ke",
-      badge: "Business Admin Demo",
-      color: "border-emerald-500 hover:bg-emerald-50/20"
-    },
-    {
-      roleLabel: "BUSINESS ADMIN (Taji Hair Studio)",
-      email: "kendi@tajistudio.com",
-      badge: "Business Admin Demo",
-      color: "border-amber-500 hover:bg-amber-50/20"
-    },
-    {
-      roleLabel: "CLINIC STAFF (Dr. David Kiprop GP)",
-      email: "dr.kiprop@afyacare.co.ke",
-      badge: "AfyaCare Practitioner",
-      color: "border-blue-500 hover:bg-blue-50/20"
-    },
-    {
-      roleLabel: "REGULAR CUSTOMER (Peter Mwangi)",
-      email: "peter@example.com",
-      badge: "Free Customer",
-      color: "border-[#854d0e] hover:bg-amber-50/20"
-    }
-  ];
+const quickDemoProfiles = [
+  {
+    roleLabel: "BUSINESS ADMIN (AfyaCare Clinic)",
+    email: "admin@afyacare.co.ke",
+    badge: "Business Admin Demo",
+    color: "border-emerald-500 hover:bg-emerald-50/20",
+    demoRole: "admin-afyacare"
+  },
+  {
+    roleLabel: "BUSINESS ADMIN (Taji Hair Studio)",
+    email: "kendi@tajistudio.com",
+    badge: "Business Admin Demo",
+    color: "border-amber-500 hover:bg-amber-50/20",
+    demoRole: "admin-taji"
+  },
+  {
+    roleLabel: "CLINIC STAFF (Dr. David Kiprop GP)",
+    email: "dr.kiprop@afyacare.co.ke",
+    badge: "AfyaCare Practitioner",
+    color: "border-blue-500 hover:bg-blue-50/20",
+    demoRole: "staff-afyacare"
+  },
+  {
+    roleLabel: "REGULAR CUSTOMER (Peter Mwangi)",
+    email: "peter@example.com",
+    badge: "Free Customer",
+    color: "border-[#854d0e] hover:bg-amber-50/20",
+    demoRole: "customer"
+  }
+];
 
+ const handleDemoLogin = (role: string) => {
+  if (role === "admin-afyacare") {
+    onLoginSuccess(
+      {
+        id: "demo-admin-afyacare",
+        name: "AfyaCare Admin",
+        email: "admin@afyacare.co.ke",
+        role: UserRole.BUSINESS_ADMIN,
+      },
+      {
+        id: "afyacare-demo",
+        business_name: "AfyaCare Clinic",
+        category: "Healthcare",
+      } as Business
+    );
+  }
+
+  if (role === "admin-taji") {
+    onLoginSuccess(
+      {
+        id: "demo-admin-taji",
+        name: "Kendi Wanjiru",
+        email: "kendi@tajistudio.com",
+        role: UserRole.BUSINESS_ADMIN,
+      },
+      {
+        id: "taji-demo",
+        business_name: "Taji Hair Studio",
+        category: "Beauty",
+      } as Business
+    );
+  }
+
+  if (role === "staff-afyacare") {
+    onLoginSuccess(
+      {
+        id: "demo-staff",
+        name: "Dr. David Kiprop",
+        email: "dr.kiprop@afyacare.co.ke",
+        role: UserRole.STAFF,
+        businessId: "afyacare-demo",
+      },
+      null
+    );
+  }
+
+  if (role === "customer") {
+    onLoginSuccess(
+      {
+        id: "demo-customer",
+        name: "Peter Mwangi",
+        email: "peter@example.com",
+        role: UserRole.CUSTOMER,
+      },
+      null
+    );
+  }
+};
   return (
     <div id="auth-root" className="min-h-screen bg-[#FDFBF7] text-stone-900 font-sans flex flex-col justify-between selection:bg-amber-200 selection:text-amber-950">
       
@@ -228,22 +290,17 @@ if (!loginEmail || !loginPassword) {
 
   <div className="grid sm:grid-cols-2 gap-4">
     {quickDemoProfiles.map((prof, i) => (
-      <button
-        id={`btn-demo-prof-${i}`}
-        key={prof.email}
-        onClick={(e) => {
-  alert(`Demo clicked: ${prof.email}`);
-  console.log("Demo clicked:", prof.email);
-  handleLogin(e, prof.email);
-}}
-        disabled={loading}
-        className={`border p-4 rounded-xl text-left transition-all ${prof.color} whitespace-normal leading-normal select-none cursor-pointer disabled:opacity-50`}
-      >
-        <span className="block text-[10px] font-black tracking-wider text-amber-800 uppercase leading-none mb-1">
-          {prof.badge}
-        </span>
+  <button
+    id={`btn-demo-prof-${i}`}
+    key={prof.email}
+    onClick={() => handleDemoLogin(prof.demoRole)}
+    disabled={loading}
+    className={`border p-4 rounded-xl text-left transition-all ${prof.color} whitespace-normal leading-normal select-none cursor-pointer disabled:opacity-50`}
+  >
+    <span className="block text-[10px] font-black tracking-wider text-amber-800 uppercase leading-none mb-1">
+      {prof.badge}
+    </span>
 
-```
     <span className="block font-bold text-stone-900 text-sm leading-tight mb-2">
       {prof.roleLabel}
     </span>
