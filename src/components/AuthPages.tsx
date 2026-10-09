@@ -151,28 +151,22 @@ const quickDemoProfiles = [
   {
     roleLabel: "BUSINESS ADMIN (AfyaCare Clinic)",
     email: "admin@afyacare.co.ke",
-    badge: "Business Admin Demo",
+    badge: "ADMIN DEMO",
     color: "border-emerald-500 hover:bg-emerald-50/20",
     demoRole: "admin-afyacare"
   },
-  {
-    roleLabel: "BUSINESS ADMIN (Taji Hair Studio)",
-    email: "kendi@tajistudio.com",
-    badge: "Business Admin Demo",
-    color: "border-amber-500 hover:bg-amber-50/20",
-    demoRole: "admin-taji"
-  },
+  
   {
     roleLabel: "CLINIC STAFF (Dr. David Kiprop GP)",
     email: "dr.kiprop@afyacare.co.ke",
-    badge: "AfyaCare Practitioner",
+    badge: "STAFF DEMO",
     color: "border-blue-500 hover:bg-blue-50/20",
     demoRole: "staff-afyacare"
   },
   {
     roleLabel: "REGULAR CUSTOMER (Peter Mwangi)",
     email: "peter@example.com",
-    badge: "Free Customer",
+    badge: "CUSTOMER DEMO",
     color: "border-[#854d0e] hover:bg-amber-50/20",
     demoRole: "customer"
   }
