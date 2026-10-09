@@ -90,7 +90,6 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             <a href="#contact" className="hover:text-amber-600 transition-colors">Contact</a>
           </nav>
 
-          tsx
 <div className="flex items-center space-x-3">
   <button
     id="btn-nav-demo-access"
