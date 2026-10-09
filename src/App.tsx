@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import LandingPage from "./components/LandingPage";
 import CareersPage from "./components/CareersPage";
 import AuthPages from "./components/AuthPages";
+import DemoAccessPage from "./components/DemoAccessPage";
 import BusinessAdminDashboard from "./components/BusinessAdminDashboard";
 import StaffDashboard from "./components/StaffDashboard";
 import CustomerDashboard from "./components/CustomerDashboard";
