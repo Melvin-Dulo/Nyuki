@@ -90,7 +90,16 @@ export default function LandingPage({ onNavigate, onOpenAuth }: LandingPageProps
             <a href="#contact" className="hover:text-amber-600 transition-colors">Contact</a>
           </nav>
 
-          <div className="flex items-center space-x-4">
+          tsx
+<div className="flex items-center space-x-3">
+  <button
+    id="btn-nav-demo-access"
+    onClick={() => onNavigate("demo-access")}
+    className="px-4 py-2.5 rounded-xl border border-amber-500 text-amber-700 hover:bg-amber-50 transition-all font-bold text-sm cursor-pointer"
+  >
+    Demo Access
+  </button>
+
   <button
     id="btn-nav-login"
     onClick={() => onOpenAuth(undefined, "signin")}
