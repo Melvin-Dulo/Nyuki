@@ -187,7 +187,8 @@ if (!loginEmail || !loginPassword) {
             <p className="text-stone-600 text-sm leading-relaxed max-w-xl">
               Nyuki provides isolated sandbox profiles to test appointment slots, predictive queues, and M-Pesa automatic STK pushes instantly. Select any direct profile on the right or quick-link underneath to explore immediately.
             </p>
-          </div>
+                   </div>
+        </div>
 
         {/* AUTHENTICATION SHADOW CARD OR ONBOARD FORM */}
         <div className="lg:col-span-6 bg-white border border-stone-200 rounded-3.5xl p-8 sm:p-10 shadow-xl shadow-stone-200/50">
