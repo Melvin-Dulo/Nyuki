@@ -308,7 +308,7 @@ services: [
   id: "inv-101",
   businessId: "afyacare-id",
   amountKES: 120,
-  description: "Business Commission - Completed Bookings",
+description: "Booking Fees - Completed Bookings",
   transactionDate: "2026-06-19",
   status: "Paid",
   paymentMethod: "M-Pesa STK"
@@ -317,7 +317,7 @@ services: [
   id: "inv-102",
   businessId: "taji-id",
   amountKES: 85,
-  description: "Business Commission - Completed Bookings",
+ description: "Booking Fees - Completed Bookings",
   transactionDate: "2026-06-01",
   status: "Pending",
   paymentMethod: "M-Pesa STK"
