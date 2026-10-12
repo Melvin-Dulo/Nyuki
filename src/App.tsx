@@ -90,6 +90,14 @@ const [authIntent, setAuthIntent] = useState<"signin" | "signup">("signup");
           onNavigate={handleNavigate} 
         />
       )}
+      
+{currentView === "demo-access" && (
+  <DemoAccessPage
+    onNavigate={handleNavigate}
+    onLoginSuccess={handleLoginSuccess}
+  />
+)}
+
 
       {currentView === "auth" && (
         <AuthPages 
