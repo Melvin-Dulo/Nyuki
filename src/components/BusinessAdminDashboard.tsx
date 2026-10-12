@@ -617,7 +617,8 @@ export default function BusinessAdminDashboard({
                   />
                 </div>
 
-           <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
+          
+<div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
   <h4 className="font-black text-sm mb-2">
     Transaction-Based Revenue Model
   </h4>
@@ -627,13 +628,14 @@ export default function BusinessAdminDashboard({
   </p>
 
   <p className="text-xs text-stone-600 mt-2">
-    Customer Fee: 1% per booking (minimum KES 5)
+    Customer Fee: KES 0 — customers book for free.
   </p>
 
   <p className="text-xs text-stone-600">
-    Booking Fee: KES 20 per successfully completed booking
+    Booking Fee: KES 20 per successfully completed booking.
   </p>
 </div>
+
                 {stkStateMsg && (
                   <div id="stk-logs-alert" className="bg-[#faf8f5] p-3.5 rounded-xl border font-mono text-[10.5px] text-stone-700 leading-relaxed whitespace-normal break-words">
                     📋 Log Check: {stkStateMsg}
