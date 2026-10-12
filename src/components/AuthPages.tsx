@@ -399,10 +399,6 @@ if (!loginEmail || !loginPassword) {
     <li>✓ M-Pesa payments</li>
   </ul>
 
-  <div className="border-t border-amber-200 pt-3 text-xs font-semibold text-stone-700">
-    <br />
-    Business Commission: 2% per completed booking
-  </div>
 </div>
 
 <button
